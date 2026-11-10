@@ -4,16 +4,21 @@
 using namespace std;
 using namespace sf;
 
-void left(int array[][4])
+void right(int array[][4])
 {
-	for (int j = 0; j < 4; j++)
+	for (int r = 0; r < 4; r++)
 	{
-		for (int i = 0; i < 3; i++)
+		for (int c = 0; c < 3; c++)
 		{
-			if (array[j][i + 1] == 0)
+			if (array[r][c + 1] == 0)
 			{
-				array[j][i + 1] = array[j][i];
-				array[j][i] = 0;
+				array[r][c + 1] = array[r][c];
+				array[r][c] = 0;
+			}
+			if (array[r][c] == array[r][c + 1])
+			{
+				array[r][c] = 0;
+				array[r][c + 1] = array[r][c + 1] * 2;
 			}
 		}
 	}
@@ -22,19 +27,13 @@ void left(int array[][4])
 int main()
 {
 	int array[4][4] = {
-		{2, 0, 0, 4},
+		{2, 0, 2, 4},
 		{0, 0, 0, 0},
 		{0, 0, 0, 0},
 		{0, 0, 0, 0}
 	};
 
-<<<<<<< Updated upstream
-    // test pushhh
-
-    return 0;
-}
-=======
-	left(array);
+	right(array);
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -61,4 +60,4 @@ int main()
 	return 0;
 
 }
->>>>>>> Stashed changes
+
