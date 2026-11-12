@@ -160,26 +160,26 @@ void bottom(int array[][4])
 
 int main()
 {
-	int array[4][4] = {
-		{2,2, 4, 4},
-		{2, 0, 0, 2},
-		{8, 4, 4, 2},
-		{2, 2, 4, 0}
-	};
-
-	left(array);
-
-	for (int i = 0; i < 4; i++)
+	float x;
+	float y;
+	float step = 85 + 10;
+	float gridSize = 4 * 85 + 3 * 10;
+	float X = -55 + (1000 - gridSize) / 2;
+	float Y = -55 + (1000 - gridSize) / 2;
+	Font font;
+	if (!font.openFromFile("arial.ttf"))
 	{
-		for (int j = 0; j < 4; j++)
-		{
-			cout << array[i][j] << " ";
-		}
-		cout << '\n';
+		return -1;
 	}
 
+	RenderWindow window(VideoMode({ 1000, 1000 }), "Random Title");
+	RectangleShape rectangle({ 400,400 });
+	RectangleShape box;
+	Text text(font, "0", 30);
+	text.setFillColor(Color::Black);
+	text.setPosition({ 250.f, 250.f });
 
-	RenderWindow window(VideoMode({ 800, 600 }), "Random Title");
+	rectangle.setPosition({ 250.f, 250.f });
 
 	while (window.isOpen())
 	{
@@ -189,9 +189,31 @@ int main()
 			{
 				window.close();
 			}
+			window.clear(Color(187, 173, 160));
+			window.draw(rectangle);
+			for (int i = 0;i < 4;i++)
+			{
+				for (int j = 0;j < 4;j++)
+				{
+
+					x = X + j * step;
+					y = Y + i * step;
+					box.setSize({ 85, 85 });
+					box.setPosition({ x,y });
+					box.setFillColor(Color::Cyan);
+					window.draw(box);
+
+					text.setString(to_string(array[i][j]));
+					text.setPosition({ x + 30,y + 30 });
+					window.draw(text);
+
+				}
+			}
 		}
-		window.clear(Color(187, 173, 160));
+
+
 		window.display();
 	}
+
 	return 0;
 }
