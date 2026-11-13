@@ -183,7 +183,7 @@ void bottom(int array[][4])
 		{
 			for (int j = 2; j >= 0; j--)
 			{
-				if (array[j +1][i] == 0)
+				if (array[j + 1][i] == 0)
 				{
 					array[j + 1][i] = array[j][i];
 					array[j][i] = 0;
@@ -251,14 +251,16 @@ bool is_full(int array[][4])
 				return false;
 			}
 		}
-
-	}
+  }
+return true;
+  }
+	
 int main()
 {
+
 	srand(time(0));
 	int array[4][4] = {0};
-	
-	
+
 	float x = 0;
 	float y = 0;
 	float step = 85 + 10;
@@ -276,9 +278,9 @@ int main()
 	RectangleShape box;
 	Text text(font, "0", 30);
 	text.setFillColor(Color::Black);
-	text.setPosition({ x+25, y+25 });
+	text.setPosition({ x + 25, y + 25 });
 
-	rectangle.setPosition({ X-10, Y-10 });
+	rectangle.setPosition({ X - 10, Y - 10 });
 	rectangle.setFillColor(Color(255, 218, 185));
 
 	while (window.isOpen())
@@ -289,9 +291,9 @@ int main()
 			{
 				window.close();
 			}
-			if (is_full(array))
+				if (event->is<Event::KeyPressed>())
 			{
-				break;
+				new_number(array);
 			}
 		}
 		if (is_full(array))
@@ -332,7 +334,7 @@ int main()
 				{
 					text.setCharacterSize(26);
 				}
-				if(array[i][j] == 0)
+				if (array[i][j] == 0)
 				{
 					text.setFillColor(Color(205, 193, 180));
 				}
@@ -346,11 +348,11 @@ int main()
 				text.setPosition({ x + 85 / 2.f, y + 85 / 2.f });
 
 				window.draw(text);
-				
+
 
 			}
-		    
-	    }
+
+		}
 
 
 		window.display();
