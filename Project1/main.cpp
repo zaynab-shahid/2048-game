@@ -261,6 +261,8 @@ int main()
 	srand(time(0));
 	int array[4][4] = {0};
 
+	new_number(array);
+	new_number(array);
 	float x = 0;
 	float y = 0;
 	float step = 85 + 10;
@@ -291,9 +293,28 @@ int main()
 			{
 				window.close();
 			}
-				if (event->is<Event::KeyPressed>())
+			else if (const auto* keyPressed = event->getIf<Event::KeyPressed>())
 			{
-				new_number(array);
+				if (keyPressed->code == Keyboard::Key::Left)
+				{
+					left(array);
+					new_number(array);
+				}
+				else if (keyPressed->code == Keyboard::Key::Right)
+				{
+					right(array);
+					new_number(array);
+				}
+				else if (keyPressed->code == Keyboard::Key::Up)
+				{
+					top(array);
+					new_number(array);
+				}
+				else if (keyPressed->code == Keyboard::Key::Down)
+				{
+					bottom(array);
+					new_number(array);
+				}
 			}
 		}
 		if (is_full(array))
