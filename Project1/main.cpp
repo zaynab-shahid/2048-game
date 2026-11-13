@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 using namespace sf;
 Color getTileColor(int value)
@@ -209,9 +211,51 @@ void bottom(int array[][4])
 		}// final time rearranging merged cells
 	}
 }
+void new_number(int array[][4])
+{
+	int space = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			if (array[i][j] == 0)
+			{
+				space++;
+			}
+		}
+	} 
+	if (space == 0)
+	{
+		return;
+	}
 
+	while (true)
+	{
+		int x = rand() % 4;
+		int y = rand() % 4;
+		if (array[x][y] == 0)
+		{
+			array[x][y] = 2;
+			return;
+		}
+	}
+}
+bool is_full(int array[][4])
+{
+	for (int x = 0; x < 4;++x)
+	{
+		for (int y = 0;y < 4;++y)
+		{
+			if (array[x][y] == 0)
+			{
+				return false;
+			}
+		}
+
+	}
 int main()
 {
+	srand(time(0));
 	int array[4][4] = {0};
 	
 	
@@ -245,6 +289,11 @@ int main()
 			{
 				window.close();
 			}
+		
+		}
+		if (is_full(array))
+		{
+			break;
 		}
 		window.clear(Color(255, 255, 224));
 		window.draw(rectangle);
