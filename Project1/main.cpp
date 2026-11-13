@@ -334,7 +334,6 @@ int main()
 				box.setFillColor(getTileColor(array[i][j]));
 				window.draw(box);
 				text.setString(to_string(array[i][j]));
-				text.setString(to_string(array[i][j]));
 				if (array[i][j] == 0)
 				{
 					text.setString("");
@@ -347,7 +346,7 @@ int main()
 				{
 					text.setCharacterSize(22);
 				}
-				else if (array[i][j])
+				else if (array[i][j]>100)
 				{
 					text.setCharacterSize(24);
 				}
