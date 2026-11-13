@@ -289,7 +289,10 @@ int main()
 			{
 				window.close();
 			}
-		
+			if (is_full(array))
+			{
+				break;
+			}
 		}
 		if (is_full(array))
 		{
