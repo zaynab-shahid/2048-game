@@ -179,7 +179,7 @@ void bottom(int array[][4])
 	for (int i = 0; i < 4; i++)
 	{
 		int count = 0;
-		while (count < 2)
+		while (count < 3)
 		{
 			for (int j = 2; j >= 0; j--)
 			{
@@ -223,7 +223,7 @@ void new_number(int array[][4])
 				space++;
 			}
 		}
-	} 
+	}
 	if (space == 0)
 	{
 		return;
@@ -251,15 +251,15 @@ bool is_full(int array[][4])
 				return false;
 			}
 		}
-  }
-return true;
-  }
-	
+	}
+	return true;
+}
+
 int main()
 {
 
 	srand(time(0));
-	int array[4][4] = {0};
+	int array[4][4] = { 0 };
 
 	new_number(array);
 	new_number(array);
