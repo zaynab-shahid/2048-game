@@ -1,0 +1,11 @@
+.vs/
+Debug/
+x64/
+Release/
+*.user
+*.ma-sfml-backup
+*.obj
+*.pdb
+*.ilk
+*.tlog
+*.exe
