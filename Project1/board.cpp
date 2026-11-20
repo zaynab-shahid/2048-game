@@ -1,6 +1,12 @@
 #include"board.h"
 #include <cstdlib>
 #include <ctime>
+#include <SFML/Graphics.hpp>
+#include <string>
+#include "color.h"
+using namespace sf;
+using namespace std;
+
 void new_number(int array[][4])
 {
 	int space = 0;
@@ -43,4 +49,70 @@ bool is_full(int array[][4])
 		}
 	}
 	return true;
+}
+
+void drawBoard(RenderWindow& window, const Font& font, const int array[4][4])
+{
+	float x = 0;
+	float y = 0;
+	float step = 85 + 10;
+	float gridSize = 4 * 85 + 3 * 10;
+	float X = (1000 - gridSize) / 2;
+	float Y = (1000 - gridSize) / 2;
+
+	RectangleShape rectangle({ gridSize + 20, gridSize + 20 });
+	RectangleShape box;
+	Text text(font, "0", 30);
+
+	rectangle.setPosition({ X - 10, Y - 10 });
+	rectangle.setFillColor(Color(255, 218, 185));
+
+	window.draw(rectangle);
+
+	for (int i = 0;i < 4;i++)
+	{
+		for (int j = 0;j < 4;j++)
+		{
+			x = X + j * step;
+			y = Y + i * step;
+			box.setSize({ 85, 85 });
+			box.setPosition({ x,y });
+			box.setFillColor(getTileColor(array[i][j]));
+			window.draw(box);
+			text.setString(to_string(array[i][j]));
+			if (array[i][j] == 0)
+			{
+				text.setString("");
+			}
+			else
+			{
+				text.setString(to_string(array[i][j]));
+			}
+			if (array[i][j] > 1000)
+			{
+				text.setCharacterSize(22);
+			}
+			else if (array[i][j] > 100)
+			{
+				text.setCharacterSize(24);
+			}
+			else
+			{
+				text.setCharacterSize(26);
+			}
+			if (array[i][j] == 0)
+			{
+				text.setFillColor(Color(205, 193, 180));
+			}
+			else
+			{
+				text.setFillColor(Color::Black);
+			}
+			FloatRect bounds = text.getLocalBounds();
+			text.setOrigin({ bounds.position.x + bounds.size.x / 2.f,bounds.position.y + bounds.size.y / 2.f });
+			text.setPosition({ x + 85 / 2.f, y + 85 / 2.f });
+
+			window.draw(text);
+		}
+	}
 }
