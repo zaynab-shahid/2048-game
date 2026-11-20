@@ -5,6 +5,8 @@
 #include "movement.h"
 #include "board.h"
 #include "color.h"
+#include "menu.h"
+#include "theme.h"
 
 using namespace std;
 using namespace sf;
@@ -25,6 +27,7 @@ int main()
 	}
 
 	RenderWindow window(VideoMode({ 1000, 1000 }), "2048-Game");
+	GameState state = MENU;
 
 	while (window.isOpen())
 	{
@@ -34,17 +37,43 @@ int main()
 			{
 				window.close();
 			}
-			else if (const auto* keyPressed = event->getIf<Event::KeyPressed>())
+			else if (state == MENU)
 			{
-				keys(*keyPressed, array);
+				menuInput(*event, state);
+			}
+			else if (state == PLAYING)
+			{
+				if (const auto* keyPressed = event->getIf<Event::KeyPressed>())
+				{
+					keys(*keyPressed, array);
+				}
 			}
 		}
-		if (is_full(array))
+		if (state == PLAYING && is_full(array))
 		{
 			break;
 		}
-		window.clear(Color(255, 255, 224));
-		drawBoard(window, font, array);
+
+		Color bgColor = Color(255, 255, 224);
+		if (current_theme == 1)
+		{
+			bgColor = Color(22, 24, 42);
+		}
+		else if (current_theme == 2)
+		{
+			bgColor = Color(235, 240, 228);
+		}
+
+		window.clear(bgColor);
+
+		if (state == MENU)
+		{
+			drawMenu(window, font);
+		}
+		else if (state == PLAYING)
+		{
+			drawBoard(window, font, array);
+		}
 
 		window.display();
 	}

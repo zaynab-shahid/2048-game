@@ -1,6 +1,5 @@
 #include "color.h"
 #include "theme.h"
-int current_theme = 2;
 
 sf::Color getTileColor(int value)
 {

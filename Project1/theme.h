@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+inline int current_theme = 0;
+
 static sf::Color themes[][12]{
 	{
 	 sf::Color(205, 193, 180), sf::Color(238, 228, 218), sf::Color(237, 224, 200),
