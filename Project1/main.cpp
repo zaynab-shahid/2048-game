@@ -8,7 +8,8 @@
 
 using namespace std;
 using namespace sf;
-	
+
+
 int main()
 {
 	srand(time(0));
@@ -35,26 +36,7 @@ int main()
 			}
 			else if (const auto* keyPressed = event->getIf<Event::KeyPressed>())
 			{
-				if (keyPressed->code == Keyboard::Key::Left)
-				{
-					left(array);
-					new_number(array);
-				}
-				else if (keyPressed->code == Keyboard::Key::Right)
-				{
-					right(array);
-					new_number(array);
-				}
-				else if (keyPressed->code == Keyboard::Key::Up)
-				{
-					top(array);
-					new_number(array);
-				}
-				else if (keyPressed->code == Keyboard::Key::Down)
-				{
-					bottom(array);
-					new_number(array);
-				}
+				keys(*keyPressed, array);
 			}
 		}
 		if (is_full(array))
