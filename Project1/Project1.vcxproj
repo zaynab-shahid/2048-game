@@ -154,11 +154,14 @@
     <ClCompile Include="color.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="movement.cpp" />
+    <ClCompile Include="theme.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="board.h" />
     <ClInclude Include="color.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="movement.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

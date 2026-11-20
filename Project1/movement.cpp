@@ -1,4 +1,7 @@
-#include"movement.h"	
+
+#include"movement.h"
+#include "board.h"
+
 void right(int array[][4])
 {
 	for (int i = 0; i < 4; i++)
@@ -150,3 +153,27 @@ void bottom(int array[][4])
 		}// final time rearranging merged cells
 	}
 }
+
+void keys(const Event::KeyPressed& keyPressed, int array[][4])
+	{
+		if (keyPressed.code == Keyboard::Key::Left)
+		{
+			left(array);
+			new_number(array);
+		}
+		else if (keyPressed.code == Keyboard::Key::Right)
+		{
+			right(array);
+			new_number(array);
+		}
+		else if (keyPressed.code == Keyboard::Key::Up)
+		{
+			top(array);
+			new_number(array);
+		}
+		else if (keyPressed.code == Keyboard::Key::Down)
+		{
+			bottom(array);
+			new_number(array);
+		}
+	}

@@ -1,57 +1,59 @@
-#include"color.h"
+#include "color.h"
+#include "theme.h"
+int current_theme = 2;
 
-Color getTileColor(int value)
+sf::Color getTileColor(int value)
 {
 	if (value == 0)
 	{
-		return Color(255, 218, 185);
+		return themes[current_theme][0];
 	}
 	else if (value == 2)
 	{
-		return Color(255, 224, 189);
+		return themes[current_theme][1];
 	}
 	else if (value == 4)
 	{
-		return Color(198, 134, 66);
+		return themes[current_theme][2];
 	}
 	else if (value == 8)
 	{
-		return Color(255, 200, 100);
+		return themes[current_theme][3];
 	}
 	else if (value == 16)
 	{
-		return Color(255, 140, 0);
+		return themes[current_theme][4];
 	}
 	else if (value == 32)
 	{
-		return Color(0, 128, 0);
+		return themes[current_theme][5];
 	}
 	else if (value == 64)
 	{
-		return Color(128, 0, 128);
+		return themes[current_theme][6];
 	}
 	else if (value == 128)
 	{
-		return Color(255, 255, 0);
+		return themes[current_theme][7];
 	}
 	else if (value == 256)
 	{
-		return Color(0, 255, 255);
+		return themes[current_theme][8];
 	}
 	else if (value == 512)
 	{
-		return Color(128, 128, 128);
+		return themes[current_theme][9];
 	}
 	else if (value == 1024)
 	{
-		return Color(165, 42, 42);
+		return themes[current_theme][10];
 	}
 	else if (value == 2048)
 	{
-		return Color(255, 215, 0);
+		return themes[current_theme][11];
 	}
 	else
 	{
-		return Color::Black;
+		return sf::Color::Black;
 	}
 }
