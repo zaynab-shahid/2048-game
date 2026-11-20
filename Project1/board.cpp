@@ -31,7 +31,21 @@ void new_number(int array[][4])
 		int y = rand() % 4;
 		if (array[x][y] == 0)
 		{
-			array[x][y] = 2;
+			if (rand() % 10 < 8)
+			{
+				if (rand() % 10 < 8)
+				{
+					array[x][y] = 2;
+				}
+				else
+				{
+					array[x][y] = 4;
+				}
+			}
+			else
+			{
+				array[x][y] = 4;
+			}
 			return;
 		}
 	}
@@ -43,6 +57,22 @@ bool is_full(int array[][4])
 		for (int y = 0;y < 4;++y)
 		{
 			if (array[x][y] == 0)
+			{
+				return false;
+			}
+			if (y < 3 && array[x][y] == array[x][y + 1])
+			{
+				return false;
+			}
+			if (x < 3 && array[x][y] == array[x + 1][y])
+			{
+				return false;
+			}
+			if (y < 3 && array[x][y] == array[x][y + 1])
+			{
+				return false;
+			}
+			if (x < 3 && array[x][y] == array[x + 1][y])
 			{
 				return false;
 			}
