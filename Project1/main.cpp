@@ -35,7 +35,7 @@ int main()
 		return -1;
 	}
 
-	RenderWindow window(VideoMode({ 1000, 1000 }), "2048-Game");
+	RenderWindow window(VideoMode({ 1000, 1000 }), "2048-Game", Style::Titlebar | Style::Close);
 	GameState state = MENU;
 
 	while (window.isOpen())
