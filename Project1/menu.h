@@ -7,6 +7,8 @@ enum GameState
 	MENU,
 	PLAYING
 };
+extern int current_mode;
+extern bool sound;
 
 void menuInput(const Event& event, GameState& state);
 void drawMenu(RenderWindow& window, const Font& font);

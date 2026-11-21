@@ -1,12 +1,13 @@
 #include <SFML/Graphics.hpp>
+#include<SFML/Audio.hpp>
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include "movement.h"
 #include "board.h"
-#include "color.h"
 #include "menu.h"
 #include "theme.h"
+#include "sound.h"
 
 using namespace std;
 using namespace sf;
@@ -19,7 +20,15 @@ int main()
 
 	new_number(array);
 	new_number(array);
-	
+
+	SoundBuffer moveBuffer,mergeBuffer,clickBuffer;
+	moveBuffer.loadFromFile("move.wav");
+	mergeBuffer.loadFromFile("merge.wav");
+	clickBuffer.loadFromFile("click.wav");
+	Sound moveSound(moveBuffer);
+	Sound mergeSound(mergeBuffer);
+	Sound clickSound(clickBuffer);
+
 	Font font;
 	if (!font.openFromFile("arial.ttf"))
 	{
@@ -74,7 +83,6 @@ int main()
 		{
 			drawBoard(window, font, array);
 		}
-
 		window.display();
 	}
 	return 0;

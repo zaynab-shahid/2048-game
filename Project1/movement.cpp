@@ -158,16 +158,19 @@ void keys(const Event::KeyPressed& keyPressed, int array[][4])
 	{
 		if (keyPressed.code == Keyboard::Key::Left)
 		{
+			
 			left(array);
 			new_number(array);
 		}
 		else if (keyPressed.code == Keyboard::Key::Right)
 		{
+			
 			right(array);
 			new_number(array);
 		}
 		else if (keyPressed.code == Keyboard::Key::Up)
 		{
+			
 			top(array);
 			new_number(array);
 		}
