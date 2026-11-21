@@ -1,8 +1,8 @@
-
+#include <SFML/Audio.hpp>
 #include"movement.h"
 #include "board.h"
 
-void right(int array[][4])
+void right(int array[][4], int &score)
 {
 	for (int i = 0; i < 4; i++)
 	{
@@ -25,6 +25,7 @@ void right(int array[][4])
 			if (array[i][j - 1] == array[i][j])
 			{
 				array[i][j] = array[i][j] * 2;
+				score += array[i][j];
 				array[i][j - 1] = 0;
 			}
 		} // combining / merging the values
@@ -40,7 +41,7 @@ void right(int array[][4])
 	}
 
 }
-void left(int array[][4])
+void left(int array[][4], int &score)
 {
 	for (int i = 0; i < 4; i++)
 	{
@@ -63,6 +64,7 @@ void left(int array[][4])
 			if (array[i][j] == array[i][j + 1])
 			{
 				array[i][j] = array[i][j] * 2;
+				score += array[i][j];
 				array[i][j + 1] = 0;
 			}
 		} // merging tiles
@@ -78,7 +80,7 @@ void left(int array[][4])
 	}
 }
 
-void top(int array[][4])
+void top(int array[][4], int &score)
 {
 	for (int i = 0; i < 4; i++) //i here is columns
 	{
@@ -101,6 +103,7 @@ void top(int array[][4])
 			if (array[j][i] == array[j + 1][i])
 			{
 				array[j][i] = array[j][i] * 2;
+				score += array[j][i];
 				array[j + 1][i] = 0;
 			}
 		} // merging tiles
@@ -116,7 +119,7 @@ void top(int array[][4])
 	}
 }
 
-void bottom(int array[][4])
+void bottom(int array[][4], int &score)
 {
 	for (int i = 0; i < 4; i++)
 	{
@@ -139,6 +142,7 @@ void bottom(int array[][4])
 			if (array[j + 1][i] == array[j][i])
 			{
 				array[j + 1][i] = array[j + 1][i] * 2;
+				score += array[j + 1][i];
 				array[j][i] = 0;
 			}
 		} // merging cells
@@ -154,29 +158,38 @@ void bottom(int array[][4])
 	}
 }
 
-void keys(const Event::KeyPressed& keyPressed, int array[][4])
+void keys(const Event::KeyPressed& keyPressed, int array[][4], int &score,Sound &moveSound, Sound &mergeSound)
 	{
 		if (keyPressed.code == Keyboard::Key::Left)
 		{
+
+			left(array, score);
+
 			
-			left(array);
+			
 			new_number(array);
 		}
 		else if (keyPressed.code == Keyboard::Key::Right)
 		{
+
+			right(array, score);
+
 			
-			right(array);
+
 			new_number(array);
 		}
 		else if (keyPressed.code == Keyboard::Key::Up)
 		{
+
+			top(array, score);
+
 			
-			top(array);
+
 			new_number(array);
 		}
 		else if (keyPressed.code == Keyboard::Key::Down)
 		{
-			bottom(array);
+			bottom(array, score);
 			new_number(array);
 		}
 	}

@@ -7,7 +7,11 @@
 #include "board.h"
 #include "menu.h"
 #include "theme.h"
+
+#include<fstream>
+
 #include "sound.h"
+
 
 using namespace std;
 using namespace sf;
@@ -17,21 +21,28 @@ int main()
 {
 	srand(time(0));
 	int array[4][4] = {0};
+	int score = 0;
+	int highscore = 0;
+	ifstream infile("highscore.txt");
+	infile >> highscore;
+	new_number(array);
+	new_number(array);
 
-	new_number(array);
-	new_number(array);
+
+	
 
 	SoundBuffer moveBuffer,mergeBuffer,clickBuffer;
-	moveBuffer.loadFromFile("move.wav");
-	mergeBuffer.loadFromFile("merge.wav");
-	clickBuffer.loadFromFile("click.wav");
 	Sound moveSound(moveBuffer);
 	Sound mergeSound(mergeBuffer);
 	Sound clickSound(clickBuffer);
 
+
 	Font font;
 	if (!font.openFromFile("arial.ttf"))
 	{
+		moveBuffer.loadFromFile("move.wav");
+		mergeBuffer.loadFromFile("merge.wav");
+		clickBuffer.loadFromFile("click.wav");
 		return -1;
 	}
 
@@ -54,9 +65,17 @@ int main()
 			{
 				if (const auto* keyPressed = event->getIf<Event::KeyPressed>())
 				{
-					keys(*keyPressed, array);
+					keys(*keyPressed, array, score,moveSound, mergeSound);
+					cout << "Score:" << score << endl;
 				}
 			}
+		}
+		
+		if (score > highscore)
+		{
+			highscore = score;
+			ofstream infile("highscore.txt");
+			infile << highscore;
 		}
 		if (state == PLAYING && is_full(array))
 		{
@@ -81,7 +100,7 @@ int main()
 		}
 		else if (state == PLAYING)
 		{
-			drawBoard(window, font, array);
+			drawBoard(window, font, array, score, highscore);
 		}
 		window.display();
 	}
