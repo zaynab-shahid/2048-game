@@ -1,4 +1,4 @@
-
+#include <SFML/Audio.hpp>
 #include"movement.h"
 #include "board.h"
 
@@ -158,21 +158,33 @@ void bottom(int array[][4], int &score)
 	}
 }
 
-void keys(const Event::KeyPressed& keyPressed, int array[][4], int &score)
+void keys(const Event::KeyPressed& keyPressed, int array[][4], int &score,Sound &moveSound, Sound &mergeSound)
 	{
 		if (keyPressed.code == Keyboard::Key::Left)
 		{
+
 			left(array, score);
+
+			
+			
 			new_number(array);
 		}
 		else if (keyPressed.code == Keyboard::Key::Right)
 		{
+
 			right(array, score);
+
+			
+
 			new_number(array);
 		}
 		else if (keyPressed.code == Keyboard::Key::Up)
 		{
+
 			top(array, score);
+
+			
+
 			new_number(array);
 		}
 		else if (keyPressed.code == Keyboard::Key::Down)

@@ -1,13 +1,17 @@
 #include <SFML/Graphics.hpp>
+#include<SFML/Audio.hpp>
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include "movement.h"
 #include "board.h"
-#include "color.h"
 #include "menu.h"
 #include "theme.h"
+
 #include<fstream>
+
+#include "sound.h"
+
 
 using namespace std;
 using namespace sf;
@@ -24,11 +28,21 @@ int main()
 	new_number(array);
 	new_number(array);
 
+
 	
+
+	SoundBuffer moveBuffer,mergeBuffer,clickBuffer;
+	Sound moveSound(moveBuffer);
+	Sound mergeSound(mergeBuffer);
+	Sound clickSound(clickBuffer);
+
 
 	Font font;
 	if (!font.openFromFile("arial.ttf"))
 	{
+		moveBuffer.loadFromFile("move.wav");
+		mergeBuffer.loadFromFile("merge.wav");
+		clickBuffer.loadFromFile("click.wav");
 		return -1;
 	}
 
@@ -51,7 +65,7 @@ int main()
 			{
 				if (const auto* keyPressed = event->getIf<Event::KeyPressed>())
 				{
-					keys(*keyPressed, array, score);
+					keys(*keyPressed, array, score,moveSound, mergeSound);
 					cout << "Score:" << score << endl;
 				}
 			}
@@ -88,7 +102,6 @@ int main()
 		{
 			drawBoard(window, font, array, score, highscore);
 		}
-
 		window.display();
 	}
 	return 0;
