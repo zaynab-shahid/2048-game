@@ -1,4 +1,4 @@
-#pragma once
+s#pragma once
 #include <SFML/Graphics.hpp>
 using namespace sf;
 void new_number(int array[][4]);
