@@ -22,6 +22,7 @@ void menuInput(const Event& event, GameState& state)
 
 		FloatRect difficultyBounds({ 340.f, 350.f }, { 320.f, 80.f });
 		FloatRect soundBounds({ 340.f, 450.f }, { 320.f, 80.f });
+		FloatRect playBounds({ 340.f, 550.f }, { 320.f, 80.f });
 		
 
         if (themeBounds.contains(clickPos))
@@ -46,10 +47,15 @@ void menuInput(const Event& event, GameState& state)
 			{
 				sound = false;
 			}
-			else
-			{
-				sound = true;
-			}
+            else if (sound == false)
+            {
+                sound = true;
+            }
+			
+        }
+        if(playBounds.contains(clickPos))
+        {
+            state = PLAYING;
         }
     }
 
@@ -89,10 +95,9 @@ void drawMenu(RenderWindow& window, const Font& font)
   
     RectangleShape soundButton({ 320.f, 80.f });
 	soundButton.setPosition({ 340.f, 450.f });
-    Text Sound(font, "Sound: ON", 34);
+    Text soundText(font, "Sound: ON", 34);
     soundButton.setOutlineThickness(3.f);
-    
-	centerText(Sound, soundButton);
+    centerText(soundText, soundButton);
 
 	RectangleShape playButton({ 320.f, 80.f });
 	playButton.setPosition({ 340.f, 550.f });
@@ -194,9 +199,11 @@ void drawMenu(RenderWindow& window, const Font& font)
 		
 		
     }
-    if (!sound)
+    if (sound==false)
     {
-        Text Sound(font, "Sound: OFF", 34);
+        soundText.setString("Sound: OFF");
+		centerText(soundText , soundButton);
+        
     }
 
     window.draw(title);
@@ -210,5 +217,5 @@ void drawMenu(RenderWindow& window, const Font& font)
 	window.draw(difficulty);
 	window.draw(difficultyText);
     window.draw(soundButton);
-    window.draw(Sound);
+    window.draw(soundText);
 }

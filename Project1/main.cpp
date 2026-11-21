@@ -7,9 +7,7 @@
 #include "board.h"
 #include "menu.h"
 #include "theme.h"
-
 #include<fstream>
-
 #include "sound.h"
 
 
@@ -40,14 +38,14 @@ int main()
 	Font font;
 	if (!font.openFromFile("arial.ttf"))
 	{
-		moveBuffer.loadFromFile("move.wav");
-		mergeBuffer.loadFromFile("merge.wav");
-		clickBuffer.loadFromFile("click.wav");
+		
 		return -1;
 	}
 
 	RenderWindow window(VideoMode({ 1000, 1000 }), "2048-Game", Style::Titlebar | Style::Close);
 	GameState state = MENU;
+	gameSound Sound;
+	Sound.loadSounds();
 
 	while (window.isOpen())
 	{
@@ -60,12 +58,21 @@ int main()
 			else if (state == MENU)
 			{
 				menuInput(*event, state);
+				if (const auto* mousePressed = event->getIf<Event::MouseButtonPressed>())
+				{
+					if(mousePressed->button == Mouse::Button::Left)
+					{
+						if(sound)
+							Sound.playClickSound();
+					}
+				}
 			}
 			else if (state == PLAYING)
 			{
 				if (const auto* keyPressed = event->getIf<Event::KeyPressed>())
 				{
-					keys(*keyPressed, array, score,moveSound, mergeSound);
+					
+					keys(*keyPressed, array, score, Sound );
 					cout << "Score:" << score << endl;
 				}
 			}
