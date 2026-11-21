@@ -7,6 +7,7 @@
 #include "color.h"
 #include "menu.h"
 #include "theme.h"
+#include<fstream>
 
 using namespace std;
 using namespace sf;
@@ -16,10 +17,15 @@ int main()
 {
 	srand(time(0));
 	int array[4][4] = {0};
+	int score = 0;
+	int highscore = 0;
+	ifstream infile("highscore.txt");
+	infile >> highscore;
+	new_number(array);
+	new_number(array);
 
-	new_number(array);
-	new_number(array);
 	
+
 	Font font;
 	if (!font.openFromFile("arial.ttf"))
 	{
@@ -45,9 +51,17 @@ int main()
 			{
 				if (const auto* keyPressed = event->getIf<Event::KeyPressed>())
 				{
-					keys(*keyPressed, array);
+					keys(*keyPressed, array, score);
+					cout << "Score:" << score << endl;
 				}
 			}
+		}
+		
+		if (score > highscore)
+		{
+			highscore = score;
+			ofstream infile("highscore.txt");
+			infile << highscore;
 		}
 		if (state == PLAYING && is_full(array))
 		{
@@ -72,7 +86,7 @@ int main()
 		}
 		else if (state == PLAYING)
 		{
-			drawBoard(window, font, array);
+			drawBoard(window, font, array, score, highscore);
 		}
 
 		window.display();

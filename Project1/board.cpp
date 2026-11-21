@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "color.h"
+#include"theme.h"
 using namespace sf;
 using namespace std;
 
@@ -31,21 +32,7 @@ void new_number(int array[][4])
 		int y = rand() % 4;
 		if (array[x][y] == 0)
 		{
-			if (rand() % 10 < 8)
-			{
-				if (rand() % 10 < 8)
-				{
-					array[x][y] = 2;
-				}
-				else
-				{
-					array[x][y] = 4;
-				}
-			}
-			else
-			{
-				array[x][y] = 4;
-			}
+			array[x][y] = (rand() % 10 < 8) ? 2 : 4;
 			return;
 		}
 	}
@@ -81,7 +68,7 @@ bool is_full(int array[][4])
 	return true;
 }
 
-void drawBoard(RenderWindow& window, const Font& font, const int array[4][4])
+void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int score, int highscore)
 {
 	float x = 0;
 	float y = 0;
@@ -145,4 +132,22 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4])
 			window.draw(text);
 		}
 	}
+	Text scoreText(font, "0", 30);
+	scoreText.setString("Score: " + to_string(score));
+	scoreText.setFillColor(Color::Black);
+	if (current_theme == 1)
+	{
+		scoreText.setFillColor(Color::White);
+	}
+	scoreText.setPosition({ X - 10, Y - 60 });
+	window.draw(scoreText);
+	Text bestText(font, "0", 30);
+	bestText.setString("Best: " + to_string(highscore));
+	bestText.setFillColor(Color::Black);
+	if (current_theme == 1)
+	{
+		bestText.setFillColor(Color::White);
+	}
+	bestText.setPosition({ X+ 250, Y - 60 });
+	window.draw(bestText);
 }
