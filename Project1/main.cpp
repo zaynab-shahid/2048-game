@@ -44,6 +44,8 @@ int main()
 
 	RenderWindow window(VideoMode({ 1000, 1000 }), "2048-Game", Style::Titlebar | Style::Close);
 	GameState state = MENU;
+	Clock gameClock;
+	int timeLimit = 0;
 	gameSound Sound;
 	Sound.loadSounds();
 
@@ -58,6 +60,26 @@ int main()
 			else if (state == MENU)
 			{
 				menuInput(*event, state);
+				if (state == PLAYING)
+				{
+					gameClock.restart();
+					if (current_mode == 0)
+					{
+						timeLimit = 180;
+					}
+					else if (current_mode == 1)
+					{
+						timeLimit = 120;
+					}
+					else if (current_mode == 2)
+					{
+						timeLimit = 90;
+					}
+					else
+					{
+						timeLimit = 60;
+					}
+				}
 				if (const auto* mousePressed = event->getIf<Event::MouseButtonPressed>())
 				{
 					if(mousePressed->button == Mouse::Button::Left)
@@ -77,7 +99,7 @@ int main()
 				}
 			}
 		}
-		
+		int timeLeft = timeLimit - gameClock.getElapsedTime().asSeconds();
 		if (score > highscore)
 		{
 			highscore = score;
@@ -88,7 +110,10 @@ int main()
 		{
 			break;
 		}
-
+		if (state == PLAYING && timeLeft<=0)
+		{
+			break;
+		}
 		Color bgColor = Color(255, 255, 224);
 		if (current_theme == 1)
 		{
@@ -107,7 +132,7 @@ int main()
 		}
 		else if (state == PLAYING)
 		{
-			drawBoard(window, font, array, score, highscore);
+			drawBoard(window, font, array, score, highscore, timeLeft);
 		}
 		window.display();
 	}

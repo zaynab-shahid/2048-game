@@ -68,7 +68,7 @@ bool is_full(int array[][4])
 	return true;
 }
 
-void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int score, int highscore)
+void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int score, int highscore, int timeLeft)
 {
 	float x = 0;
 	float y = 0;
@@ -150,4 +150,13 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 	}
 	bestText.setPosition({ X+ 250, Y - 60 });
 	window.draw(bestText);
+	Text timeText(font, "0", 30);
+	timeText.setString("Time: " + to_string(timeLeft));
+	timeText.setFillColor(Color::Black);
+	if (current_theme == 1)
+	{
+		timeText.setFillColor(Color::White);
+	}
+	timeText.setPosition({ X - 10, Y + 400 });
+	window.draw(timeText);
 }
