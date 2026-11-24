@@ -42,7 +42,7 @@ int main()
 		return -1;
 	}
 
-	RenderWindow window(VideoMode({ 1000, 1000 }), "2048-Game", Style::Titlebar | Style::Close);
+	RenderWindow window(VideoMode({ 800, 900 }), "2048-Game", Style::Titlebar | Style::Close);
 	GameState state = MENU;
 	Clock gameClock;
 	int timeLimit = 0;

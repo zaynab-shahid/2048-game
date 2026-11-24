@@ -72,16 +72,17 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 {
 	float x = 0;
 	float y = 0;
-	float step = 85 + 10;
-	float gridSize = 4 * 85 + 3 * 10;
-	float X = (1000 - gridSize) / 2;
-	float Y = (1000 - gridSize) / 2;
+	float tileSize = 155;
+	float step = tileSize + 10;
+	float gridSize = 4 * tileSize + 3 * 10;
+	float X = (800 - gridSize) / 2;
+	float Y = (900 - gridSize) ;
 
 	RectangleShape rectangle({ gridSize + 20, gridSize + 20 });
 	RectangleShape box;
 	Text text(font, "0", 30);
 
-	rectangle.setPosition({ X - 10, Y - 10 });
+	rectangle.setPosition({ X - 10, Y - 40 });
 	rectangle.setFillColor(Color(255, 218, 185));
 
 	window.draw(rectangle);
@@ -92,7 +93,7 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 		{
 			x = X + j * step;
 			y = Y + i * step;
-			box.setSize({ 85, 85 });
+			box.setSize({ tileSize, tileSize });
 			box.setPosition({ x,y });
 			box.setFillColor(getTileColor(array[i][j]));
 			window.draw(box);

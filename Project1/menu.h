@@ -5,7 +5,8 @@ using namespace sf;
 enum GameState
 {
 	MENU,
-	PLAYING
+	PLAYING,
+	TRANSITION
 };
 extern int current_mode;
 extern bool sound;
