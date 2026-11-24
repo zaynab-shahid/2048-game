@@ -35,7 +35,7 @@ int main()
 	}
 
 	RenderWindow window(VideoMode({ 800, 950 }), "2048-Game", Style::Titlebar | Style::Close);
-	GameState state = MENU;
+	GameState state = WIN;
 	Clock gameClock;
 	int timeLimit = 0;
 	gameSound Sound;
@@ -90,7 +90,7 @@ int main()
 					cout << "Score:" << score << endl;
 				}
 			}
-			else if (state == TRANSITION)
+			else if (state == WIN)
 			{
 				winScreenInput(*event, window, state, score, array);
 			}
@@ -139,7 +139,7 @@ int main()
 		{
 			drawBoard(window, font, array, score, highscore, timeLeft);
 		}
-		else if (state == TRANSITION)
+		else if (state == WIN)
 		{
 			winScreen(window, font, array, score, highscore);
 		}

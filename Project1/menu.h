@@ -6,9 +6,14 @@ enum GameState
 {
 	MENU,
 	PLAYING,
+<<<<<<< HEAD
 	TRANSITION,
 	HOWTOPLAY,
 	LEADERBOARD
+=======
+	WIN,
+	LOSE
+>>>>>>> 3a5a4f3f5780e011e8c69923df95284ab6940c9f
 };
 extern int current_mode;
 extern bool sound;

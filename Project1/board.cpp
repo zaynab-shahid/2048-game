@@ -190,27 +190,31 @@ else if (menuBounds.contains(clickPos))
 void winScreen(RenderWindow& window, const Font& font, const int array[4][4], int score, int highscore)
 {
 	Text title(font, "YOU WON!", 90);
-	title.setPosition({ 210.f , 100.f });
+	title.setPosition({ 170.f , 280.f });
 	Text description(font, "You reached 2048! Retry or go back to menu?", 20);
+<<<<<<< HEAD
 	description.setPosition({ 225.f, 220.f });
+=======
+	description.setPosition({ 195.f, 405.f });
+>>>>>>> 3a5a4f3f5780e011e8c69923df95284ab6940c9f
 
 	RectangleShape retry({ 220.f, 75.f });
-	retry.setPosition({ 200.f, 340.f });
+	retry.setPosition({ 165.f, 570.f });
 	RectangleShape menu({ 220.f, 75.f });
-	menu.setPosition({ 450.f, 340.f });
+	menu.setPosition({ 415.f, 570.f });
 
 	Text restart(font, "Restart", 27);
-	restart.setPosition({ 262.f, 358.f });
+	restart.setPosition({ 231.f, 590.f });
 	Text returnMenu(font, "Menu", 27);
-	returnMenu.setPosition({ 520.f, 358.f });
+	returnMenu.setPosition({ 491.f, 590.f });
 
 	Text scoreText(font, "Score: " + to_string(score), 22);
-	scoreText.setPosition({ 205.f, 275.f });
+	scoreText.setPosition({ 335.f, 476.f });
 	Text bestScore(font, "Best: " + to_string(highscore), 22);
-	bestScore.setPosition({ 205.f, 300.f });
+	bestScore.setPosition({ 335.f, 501.f });
 
 	RectangleShape scoreBox({ 230.f, 64.f });
-	scoreBox.setPosition({ 195.f, 266.f });
+	scoreBox.setPosition({ 285.f, 470.f });
 	scoreBox.setOutlineThickness(2.f);
 
 	if (current_theme == 0)
