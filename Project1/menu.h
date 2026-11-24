@@ -6,7 +6,8 @@ enum GameState
 {
 	MENU,
 	PLAYING,
-	TRANSITION
+	WIN,
+	LOSE
 };
 extern int current_mode;
 extern bool sound;
