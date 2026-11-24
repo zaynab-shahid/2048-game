@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="board.cpp" />
     <ClCompile Include="color.cpp" />
+    <ClCompile Include="howtoplay.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="movement.cpp" />
@@ -161,6 +162,7 @@
   <ItemGroup>
     <ClInclude Include="board.h" />
     <ClInclude Include="color.h" />
+    <ClInclude Include="howtoplay.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="movement.h" />
     <ClInclude Include="sound.h" />

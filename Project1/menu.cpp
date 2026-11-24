@@ -3,7 +3,6 @@
 using namespace sf;
 int current_mode = 0;
 bool sound = true;
-
 void centerText(Text& text, RectangleShape& button)
 {
     FloatRect textRect = text.getLocalBounds();
@@ -20,10 +19,12 @@ void menuInput(const Event& event, GameState& state)
         FloatRect themeBounds({ 340.f, 250.f }, { 320.f, 80.f });
         Vector2f clickPos(static_cast<float>(mousePressed->position.x), static_cast<float>(mousePressed->position.y));
 
-		FloatRect difficultyBounds({ 340.f, 350.f }, { 320.f, 80.f });
-		FloatRect soundBounds({ 340.f, 450.f }, { 320.f, 80.f });
-		FloatRect playBounds({ 340.f, 550.f }, { 320.f, 80.f });
-		
+        FloatRect difficultyBounds({ 340.f, 350.f }, { 320.f, 80.f });
+        FloatRect soundBounds({ 340.f, 450.f }, { 320.f, 80.f });
+        FloatRect playBounds({ 340.f, 550.f }, { 320.f, 80.f });
+		FloatRect howToPlayBounds({ 100.f, 750.f }, { 160.f, 60.f });
+        FloatRect leaderboardBounds({ 550.f, 750.f }, { 160.f, 60.f });
+
 
         if (themeBounds.contains(clickPos))
         {
@@ -33,27 +34,36 @@ void menuInput(const Event& event, GameState& state)
                 current_theme = 0;
             }
         }
-		if (difficultyBounds.contains(clickPos))
-		{
-            current_mode = (current_mode + 1);
-			if (current_mode > 3)
-			{
-				current_mode = 0;
-			}
-		}
-        if(soundBounds.contains(clickPos))
+        if (difficultyBounds.contains(clickPos))
         {
-            if(sound)
-			{
-				sound = false;
-			}
+            current_mode = (current_mode + 1);
+            if (current_mode > 3)
+            {
+                current_mode = 0;
+            }
+        }
+        if (soundBounds.contains(clickPos))
+        {
+            if (sound)
+            {
+                sound = false;
+            }
             else if (sound == false)
             {
                 sound = true;
             }
-			
+
         }
-        if(playBounds.contains(clickPos))
+        if (howToPlayBounds.contains(clickPos))
+        {
+            state = HOWTOPLAY;
+        }
+        if (leaderboardBounds.contains(clickPos))
+        {
+            state = LEADERBOARD;
+        }
+
+        if (playBounds.contains(clickPos))
         {
             state = PLAYING;
         }
@@ -64,6 +74,14 @@ void menuInput(const Event& event, GameState& state)
     {
         state = PLAYING;
     }
+    if (state == HOWTOPLAY )
+    {
+        if (keyPressed != nullptr && keyPressed->code == Keyboard::Key::Escape)
+        {
+            state = MENU;
+        }
+    }
+
 }
 
 void drawMenu(RenderWindow& window, const Font& font)
@@ -101,14 +119,20 @@ void drawMenu(RenderWindow& window, const Font& font)
 	playButton.setPosition({ x, 550.f });
     playButton.setOutlineThickness(4.f);
 
+	RectangleShape  howToPlayButton({ 160.f, 60.f });
+	howToPlayButton.setPosition({ 100, 750.f });
+	howToPlayButton.setOutlineColor(Color::White);
+	howToPlayButton .setOutlineThickness(4.f);
+
+	RectangleShape leaderboardButton({ 160.f, 60.f });
+	leaderboardButton.setPosition({ 550, 750.f });
+	leaderboardButton.setOutlineColor(Color::White);
+	leaderboardButton.setOutlineThickness(4.f);
+
     Text difficultyText(font, "Difficulty: Easy", 34);
     difficultyText.setPosition({ x, 370.f });
     difficultyText.setFillColor(Color::White);
   
-    
-
-	
-
     Text themeText(font, "Theme: Standard", 34);
     themeText.setFillColor(Color::White);
     themeText.setPosition({x, 270.f });
@@ -120,6 +144,15 @@ void drawMenu(RenderWindow& window, const Font& font)
 
     Text hint(font, "Press Enter to play", 20);
     hint.setPosition({ x+85, 650.f });
+
+	Text howToPlayText(font, "How to Play", 26);
+	centerText(howToPlayText, howToPlayButton);
+    howToPlayText.setFillColor(Color::White);
+
+	Text leaderboardText(font, "Leaderboard", 26);
+	centerText(leaderboardText, leaderboardButton);
+	leaderboardButton.setFillColor(Color::White);
+
 
 
 
@@ -166,6 +199,10 @@ void drawMenu(RenderWindow& window, const Font& font)
 		difficulty.setFillColor(Color(143, 122, 102));
         soundButton.setOutlineColor(Color::Black);
         soundButton.setFillColor(Color(143, 122, 102));
+        howToPlayButton.setFillColor(Color(143, 122, 102));
+        howToPlayButton.setOutlineColor(Color::Black);
+        leaderboardButton.setFillColor(Color(143, 122, 102));
+        leaderboardButton.setOutlineColor(Color::Black);
 		
 		
     }
@@ -184,8 +221,10 @@ void drawMenu(RenderWindow& window, const Font& font)
         difficulty.setFillColor(Color(109, 93, 211));
         soundButton.setOutlineColor(Color::White);
 		soundButton.setFillColor(Color(109, 93, 211));
-		
-		
+        howToPlayButton.setFillColor(Color(109, 93, 211));
+        howToPlayButton.setOutlineColor(Color::White);
+		leaderboardButton.setFillColor(Color(109, 93, 211));
+		leaderboardButton.setOutlineColor(Color::White);
 		
     }
     else
@@ -202,6 +241,10 @@ void drawMenu(RenderWindow& window, const Font& font)
 		difficulty.setFillColor(Color(86, 117, 89));
         soundButton.setOutlineColor(Color::Black);
 		soundButton.setFillColor(Color(86, 117, 89));	
+        howToPlayButton.setFillColor(Color(87, 138, 108));
+        howToPlayButton.setOutlineColor(Color::Black);
+		leaderboardButton.setFillColor(Color(87, 138, 108));
+		leaderboardButton.setOutlineColor(Color::Black);
     }
     if (sound==false)
     {
@@ -209,7 +252,6 @@ void drawMenu(RenderWindow& window, const Font& font)
 		centerText(soundText , soundButton);
         
     }
-
     window.draw(title);
     window.draw(description);
     window.draw(themeButton);
@@ -222,4 +264,9 @@ void drawMenu(RenderWindow& window, const Font& font)
 	window.draw(difficultyText);
     window.draw(soundButton);
     window.draw(soundText);
+    window.draw(howToPlayButton);
+    window.draw(howToPlayText);
+	window.draw(leaderboardButton);
+	window.draw(leaderboardText);
+
 }

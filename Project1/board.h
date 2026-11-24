@@ -7,3 +7,5 @@ bool is_full(int array[][4]);
 void drawBoard(RenderWindow& window, const Font& font, const int array[][4], int score,int highscore, int timeLeft );
 void winScreen(RenderWindow& window, const Font& font, const int array[][4], int score, int highscore);
 void winScreenInput(const Event& event, const RenderWindow& window, GameState& state, int& score, int array[4][4]);
+void howToPlayInput(const Event& event, const RenderWindow& window, GameState& state);
+void leaderboardInput(const Event& event, const RenderWindow& window, GameState& state);

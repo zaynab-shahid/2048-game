@@ -173,19 +173,19 @@ void winScreenInput(const Event& event, const RenderWindow& window, GameState& s
 	FloatRect retryBounds({ 200.f, 340.f }, { 220.f, 75.f });
 	FloatRect menuBounds({ 450.f, 340.f }, { 220.f, 75.f });
 
-	if (retryBounds.contains(clickPos))
-	{
-		score = 0;
-		for (int r = 0; r < 4; r++)
-			for (int c = 0; c < 4; c++)
-				array[r][c] = 0;
+if (retryBounds.contains(clickPos))
+{
+	score = 0;
+	for (int r = 0; r < 4; r++)
+		for (int c = 0; c < 4; c++)
+			array[r][c] = 0;
 
-		state = GameState::PLAYING;
-	}
-	else if (menuBounds.contains(clickPos))
-	{
-		state = GameState::MENU;
-	}
+	state = GameState::PLAYING;
+}
+else if (menuBounds.contains(clickPos))
+{
+	state = GameState::MENU;
+}
 }
 void winScreen(RenderWindow& window, const Font& font, const int array[4][4], int score, int highscore)
 {
@@ -193,7 +193,7 @@ void winScreen(RenderWindow& window, const Font& font, const int array[4][4], in
 	title.setPosition({ 210.f , 100.f });
 	Text description(font, "You reached 2048! Retry or go back to menu?", 20);
 	description.setPosition({ 225.f, 220.f });
-	
+
 	RectangleShape retry({ 220.f, 75.f });
 	retry.setPosition({ 200.f, 340.f });
 	RectangleShape menu({ 220.f, 75.f });
@@ -255,7 +255,8 @@ void winScreen(RenderWindow& window, const Font& font, const int array[4][4], in
 		bestScore.setFillColor(Color(68, 98, 76));
 		window.clear(Color(235, 240, 228));
 	}
-	
+
+
 	window.draw(menu);
 	window.draw(retry);
 	window.draw(description);
@@ -265,4 +266,33 @@ void winScreen(RenderWindow& window, const Font& font, const int array[4][4], in
 	window.draw(scoreBox);
 	window.draw(scoreText);
 	window.draw(bestScore);
+}
+void howToPlayInput(const Event& event, const RenderWindow& window, GameState& state)
+{
+	if (state != HOWTOPLAY)
+		return;
+	const Event::MouseButtonPressed* mousePressed = event.getIf<Event::MouseButtonPressed>();
+	Vector2f clickPos(static_cast<float>(mousePressed->position.x), static_cast<float>(mousePressed->position.y));
+	if (!mousePressed || mousePressed->button != Mouse::Button::Left)
+	{
+		
+		FloatRect howToPlayBounds({ 100.f, 750.f }, { 160.f, 60.f });	
+		if (howToPlayBounds.contains(clickPos))
+		{
+			state = HOWTOPLAY;
+		}
+		const Event::KeyPressed* keyPressed = event.getIf<Event::KeyPressed>();
+	    if (state == HOWTOPLAY )
+	    {
+		  if (keyPressed != nullptr && keyPressed->code == Keyboard::Key::Escape)
+		   {
+			state = MENU;
+		   }
+	    }
+	
+	}
+	
+	
+	
+
 }

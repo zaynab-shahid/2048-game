@@ -32,6 +32,9 @@
     <ClCompile Include="sound.cpp">
       <Filter>Header Files\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="howtoplay.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="movement.h">
@@ -47,6 +50,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="howtoplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

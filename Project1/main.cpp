@@ -9,6 +9,7 @@
 #include "theme.h"
 #include<fstream>
 #include "sound.h"
+#include"howtoplay.h"
 
 
 using namespace std;
@@ -93,6 +94,15 @@ int main()
 			{
 				winScreenInput(*event, window, state, score, array);
 			}
+			else if (state == HOWTOPLAY)
+			{
+				howToPlayInput(*event, window, state);
+				drawHowToPlay(window, font);
+			}
+			/*else if (state == LEADERBOARD)
+			{
+				leaderboardInput(*event, window, state);
+			}*/
 		}
 		int timeLeft = timeLimit - gameClock.getElapsedTime().asSeconds();
 		if (score > highscore)
