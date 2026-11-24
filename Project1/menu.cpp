@@ -68,44 +68,50 @@ void menuInput(const Event& event, GameState& state)
 
 void drawMenu(RenderWindow& window, const Font& font)
 {
+	float w = window.getSize().x / 2.f; 
+    float x = 240.f;
     Text title(font, "2048", 90);
-    title.setPosition({ 385.f, 100.f });
+    title.setPosition({ 285.f, 100.f });
 
 	Text description(font, "C++/SFML-Fundamental Programming Project", 24);
-	description.setPosition({ 270.f, 200.f });
+	description.setPosition({ 160, 200.f });
     description.setFillColor(Color::Black);
 	
     RectangleShape themeButton({ 320.f, 80.f });
-    themeButton.setPosition({ 340.f, 250.f });
+    themeButton.setPosition({ x, 250.f });
     
     RectangleShape themeButtonBorder({ 320.f, 80.f });
-	themeButtonBorder.setPosition({ 340.f, 250.f });
+	themeButtonBorder.setPosition({ x, 250.f });
 	themeButtonBorder.setFillColor(Color::Transparent);
 	themeButtonBorder.setOutlineColor(Color::White);
-	themeButtonBorder.setOutlineThickness(3.f);
+	themeButtonBorder.setOutlineThickness(4.f);
 
 	RectangleShape difficulty({ 320.f, 80.f });
-	difficulty.setPosition({ 340.f, 350.f });
+	difficulty.setPosition({ x, 350.f });
 	difficulty.setOutlineColor(Color::White);
-	difficulty.setOutlineThickness(3.f);
+	difficulty.setOutlineThickness(4.f);
+    
+    RectangleShape soundButton({ 320.f, 80.f });
+	soundButton.setPosition({ x, 450.f });
+    Text soundText(font, "Sound: ON", 34);
+    soundButton.setOutlineThickness(4.f);
+    centerText(soundText, soundButton);
+    
+    RectangleShape playButton({ 320.f, 80.f });
+	playButton.setPosition({ x, 550.f });
+    playButton.setOutlineThickness(4.f);
 
     Text difficultyText(font, "Difficulty: Easy", 34);
-    difficultyText.setPosition({ 320.f, 370.f });
+    difficultyText.setPosition({ x, 370.f });
     difficultyText.setFillColor(Color::White);
   
-    RectangleShape soundButton({ 320.f, 80.f });
-	soundButton.setPosition({ 340.f, 450.f });
-    Text soundText(font, "Sound: ON", 34);
-    soundButton.setOutlineThickness(3.f);
-    centerText(soundText, soundButton);
+    
 
-	RectangleShape playButton({ 320.f, 80.f });
-	playButton.setPosition({ 340.f, 550.f });
-    playButton.setOutlineThickness(3.f);
+	
 
     Text themeText(font, "Theme: Standard", 34);
     themeText.setFillColor(Color::White);
-    themeText.setPosition({ 362.f, 270.f });
+    themeText.setPosition({x, 270.f });
    
 	Text playText(font, "Play", 34);
 	playText.setPosition({ 340.f, 570.f });
@@ -113,7 +119,7 @@ void drawMenu(RenderWindow& window, const Font& font)
     centerText(playText, playButton);
 
     Text hint(font, "Press Enter to play", 20);
-    hint.setPosition({ 420.f, 650.f });
+    hint.setPosition({ x+85, 650.f });
 
 
 

@@ -74,24 +74,19 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 {
 	float x = 0;
 	float y = 0;
-<<<<<<< HEAD
+
 	float tileSize = 155;
 	float step = tileSize + 10;
 	float gridSize = 4 * tileSize + 3 * 10;
 	float X = (800 - gridSize) / 2;
-	float Y = (900 - gridSize) ;
-=======
-	float step = 85 + 10; // width + gap of each tile
-	float gridSize = 4 * 85 + 3 * 10; 
-	float X = (1000 - gridSize) / 2;
-	float Y = (1000 - gridSize) / 2;
->>>>>>> 96aec9a6527c5ee4518d98ec015c1f194b1e1b68
+	float Y = 270 ;
+
 
 	RectangleShape rectangle({ gridSize + 20, gridSize + 20 }); // grid
 	RectangleShape box; // each tile
 	Text text(font, "0", 30);
 
-	rectangle.setPosition({ X - 10, Y - 40 });
+	rectangle.setPosition({ X - 10, Y - 10 });
 	rectangle.setFillColor(Color(255, 218, 185));
 
 	window.draw(rectangle);
