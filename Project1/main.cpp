@@ -26,20 +26,11 @@ int main()
 	new_number(array);
 	new_number(array);
 
-
-	
-
-	SoundBuffer moveBuffer,mergeBuffer,clickBuffer;
-	Sound moveSound(moveBuffer);
-	Sound mergeSound(mergeBuffer);
-	Sound clickSound(clickBuffer);
-
-
 	Font font;
 	if (!font.openFromFile("arial.ttf"))
 	{
 		
-		return -1;
+		return 0;
 	}
 
 	RenderWindow window(VideoMode({ 800, 900 }), "2048-Game", Style::Titlebar | Style::Close);
@@ -98,6 +89,10 @@ int main()
 					cout << "Score:" << score << endl;
 				}
 			}
+			else if (state == TRANSITION)
+			{
+				winScreenInput(*event, window, state, score, array);
+			}
 		}
 		int timeLeft = timeLimit - gameClock.getElapsedTime().asSeconds();
 		if (score > highscore)
@@ -133,6 +128,10 @@ int main()
 		else if (state == PLAYING)
 		{
 			drawBoard(window, font, array, score, highscore, timeLeft);
+		}
+		else if (state == TRANSITION)
+		{
+			winScreen(window, font, array, score, highscore);
 		}
 		window.display();
 	}

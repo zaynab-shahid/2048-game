@@ -195,9 +195,7 @@ void drawMenu(RenderWindow& window, const Font& font)
         difficulty.setOutlineColor(Color::Black);
 		difficulty.setFillColor(Color(86, 117, 89));
         soundButton.setOutlineColor(Color::Black);
-		soundButton.setFillColor(Color(86, 117, 89));
-		
-		
+		soundButton.setFillColor(Color(86, 117, 89));	
     }
     if (sound==false)
     {
