@@ -206,23 +206,21 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 			}
 			if (array[i][j] > 1000)
 			{
-				text.setCharacterSize(22);
+				text.setCharacterSize(56);
 			}
 			else if (array[i][j] > 100)
 			{
-				text.setCharacterSize(24);
+				text.setCharacterSize(58);
 			}
 			else
 			{
-				text.setCharacterSize(26);
+				text.setCharacterSize(60);
 			}
 			if (array[i][j] != 0)
 			{
 				text.setFillColor(Color::Black);
 			}
-			FloatRect bounds = text.getLocalBounds();
-			text.setOrigin({ bounds.position.x + bounds.size.x / 2.f,bounds.position.y + bounds.size.y / 2.f });
-			text.setPosition({ x + 85 / 2.f, y + 85 / 2.f });
+			centerText(text, box);
 
 			window.draw(text);
 		}
@@ -245,12 +243,12 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 	bestScoreBox.setOutlineThickness(3.f);
 
 
-	Text scoreText(font, "0", 25);
+	Text scoreText(font, "0", 23);
 	scoreText.setString("Score: " + to_string(score));
 	scoreText.setFillColor(Color::White);
 	centerText(scoreText, scoreBox);
 
-	Text bestText(font, "0", 25);
+	Text bestText(font, "0", 23);
 	bestText.setString("Best: " + to_string(highscore));
 	bestText.setFillColor(Color::White);
 	centerText(bestText, bestScoreBox);
@@ -278,7 +276,7 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 	themeButton.setPosition({ gap, pos });
 	themeButton.setOutlineColor(Color::Black);
 	themeButton.setOutlineThickness(3.f);
-	Text themeText(font, "Theme: Standard", 18);
+	Text themeText(font, "Theme: Standard", 16);
 	themeText.setFillColor(Color::White);
 	centerText(themeText, themeButton);
 
@@ -315,7 +313,7 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 		diffLevel.setString("Hard 4x4");
 	}
 	else
-		diffLevel.setString("Extreme Hard 4x4");
+		diffLevel.setString("Exta Hard 4x4");
 
 	if (current_theme == 0)
 	{
@@ -578,9 +576,9 @@ void loseScreen(RenderWindow& window, const Font& font, const int array[4][4], i
 	menu.setPosition({ 415.f, 570.f });
 
 	Text restart(font, "Retry", 27);
-	restart.setPosition({ 242.f, 590.f });
+	centerText(restart, retry);
 	Text returnMenu(font, "Menu", 27);
-	returnMenu.setPosition({ 491.f, 590.f });
+	centerText(returnMenu, menu);
 
 	Text scoreText(font, "Score: " + to_string(score), 22);
 	scoreText.setPosition({ 349.f, 476.f });

@@ -46,7 +46,7 @@ int main()
 	new_number(array);
 
 	Font font;
-	if (!font.openFromFile("arial.ttf"))
+	if (!font.openFromFile("Blue Winter.otf"))
 	{
 		return 0;
 	}
@@ -108,10 +108,6 @@ int main()
 				
 			}
 		
-			/*else if (state == LEADERBOARD)
-			{
-				leaderboardInput(*event, window, state);
-			}*/
 		}
 
 		if (state == PLAYING && previousState != PLAYING)

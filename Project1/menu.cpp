@@ -94,7 +94,7 @@ void drawMenu(RenderWindow& window, const Font& font)
     title.setPosition({ 285.f, 100.f });
 
 	Text description(font, "C++/SFML-Fundamental Programming Project", 24);
-	description.setPosition({ 150, 200.f });
+	description.setPosition({ 135, 200.f });
     description.setFillColor(Color::Black);
 	
     RectangleShape themeButton({ 320.f, 80.f });
@@ -131,7 +131,7 @@ void drawMenu(RenderWindow& window, const Font& font)
 	leaderboardButton.setOutlineColor(Color::White);
 	leaderboardButton.setOutlineThickness(4.f);
 
-    Text difficultyText(font, "Difficulty: Easy", 34);
+    Text difficultyText(font, "Difficulty: Easy", 32);
     difficultyText.setPosition({ x, 370.f });
     difficultyText.setFillColor(Color::White);
   
@@ -145,13 +145,13 @@ void drawMenu(RenderWindow& window, const Font& font)
     centerText(playText, playButton);
 
     Text hint(font, "Press Enter to play", 20);
-    hint.setPosition({ x+75, 650.f });
+    hint.setPosition({ x+70, 650.f });
 
-	Text howToPlayText(font, "How to Play", 26);
+	Text howToPlayText(font, "How to Play", 23);
 	centerText(howToPlayText, howToPlayButton);
     howToPlayText.setFillColor(Color::White);
 
-	Text leaderboardText(font, "Leaderboard", 26);
+	Text leaderboardText(font, "Leaderboard", 23);
 	centerText(leaderboardText, leaderboardButton);
 	leaderboardButton.setFillColor(Color::White);
 
@@ -184,6 +184,7 @@ void drawMenu(RenderWindow& window, const Font& font)
 	else if (current_mode == 3)
 	{
 		difficultyText.setString("Difficulty: Extra Hard");
+        difficultyText.setCharacterSize(27);
         centerText(difficultyText, difficulty);
 	}
 
