@@ -10,6 +10,13 @@
 using namespace sf;
 using namespace std;
 
+void retry(int array[][4], int timeLimit)
+{
+	timeLimit = 0;
+	new_number(array);
+	new_number(array);
+}
+
 bool Won(const int array[][4])
 {
 	for (int i = 0; i < 4; i++)
@@ -345,11 +352,11 @@ void loseScreenInput(const Event& event, const RenderWindow& window, GameState& 
 			for (int c = 0; c < 4; c++)
 				array[r][c] = 0;
 
-		state = GameState::PLAYING;
+		GameState state = PLAYING;
 	}
 	else if (menuBounds.contains(clickPos))
 	{
-		state = GameState::MENU;
+		GameState state = MENU;
 	}
 }
 

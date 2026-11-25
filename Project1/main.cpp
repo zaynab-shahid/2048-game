@@ -116,10 +116,12 @@ int main()
 		if (state == PLAYING && is_full(array))
 		{
 			state = LOSE;
+			retry(array, timeLimit);
 		}
 		if (state == PLAYING && timeLeft<=0)
 		{
 			state = LOSE;
+			retry(array, timeLimit);
 		}
 		Color bgColor = Color(255, 255, 224);
 		if (current_theme == 1)
