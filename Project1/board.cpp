@@ -171,8 +171,18 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 	Text text(font, "0", 30);
 
 	rectangle.setPosition({ X - 10, Y - 10 });
-	rectangle.setFillColor(Color(255, 218, 185));
-
+	if (current_theme == 0)
+	{
+		rectangle.setFillColor(Color(187, 173, 160));
+	}
+	else if (current_theme == 1)
+	{
+		rectangle.setFillColor(Color(62, 44, 112));
+	}
+	else if (current_theme == 2)
+	{
+		rectangle.setFillColor(Color(76, 122, 86));
+	}
 	window.draw(rectangle);
 
 	for (int i = 0;i < 4;i++)
@@ -336,8 +346,6 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 		soundButton.setFillColor(Color(86, 117, 89));
 		menu.setFillColor(Color({ 86, 117, 89 }));
 		retry.setFillColor(Color({ 86, 117, 89 }));
-		
-
 	}
 	if (sound == false)
 	{
