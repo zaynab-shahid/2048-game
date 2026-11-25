@@ -8,4 +8,5 @@ Release/
 *.pdb
 *.ilk
 *.tlog
-*.exe
+*.exeleaderboard.txt 
+highscore.txt 

@@ -328,10 +328,12 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 		themeButton.setOutlineColor(Color::White);
 		themeText.setString("Theme: Neon");
 		menu.setFillColor(Color({ 109,93,211 }));
+
 		menu.setOutlineColor(Color::White);
 		retry.setFillColor(Color({ 109,93,211 }));
 		retry.setOutlineColor(Color::White);
 		
+
 	}
 	else if (current_theme == 2)
 	{
