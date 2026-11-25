@@ -5,7 +5,7 @@ using namespace sf;
 
 void drawHowToPlay(RenderWindow& window, const Font& font)
 {
-	
+    window.clear();
     Text HowToPlayText(font, "How to Play", 70);
     HowToPlayText.setPosition({ 285.f, 100.f });
     Text Instructions(font, "HOW TO PLAY\n"

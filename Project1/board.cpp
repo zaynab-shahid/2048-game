@@ -133,6 +133,8 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 			window.draw(text);
 		}
 	}
+	Text title(font, "2048", 85);
+
 	Text scoreText(font, "0", 30);
 	scoreText.setString("Score: " + to_string(score));
 	scoreText.setFillColor(Color::Black);
@@ -158,7 +160,7 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 	{
 		timeText.setFillColor(Color::White);
 	}
-	timeText.setPosition({ X - 10, Y + 400 });
+	timeText.setPosition({ X-10 , 125  });
 	window.draw(timeText);
 }
 
@@ -192,11 +194,9 @@ void winScreen(RenderWindow& window, const Font& font, const int array[4][4], in
 	Text title(font, "YOU WON!", 90);
 	title.setPosition({ 170.f , 280.f });
 	Text description(font, "You reached 2048! Retry or go back to menu?", 20);
-<<<<<<< HEAD
+
 	description.setPosition({ 225.f, 220.f });
-=======
 	description.setPosition({ 195.f, 405.f });
->>>>>>> 3a5a4f3f5780e011e8c69923df95284ab6940c9f
 
 	RectangleShape retry({ 220.f, 75.f });
 	retry.setPosition({ 165.f, 570.f });

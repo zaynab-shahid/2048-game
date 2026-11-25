@@ -35,7 +35,7 @@ int main()
 	}
 
 	RenderWindow window(VideoMode({ 800, 950 }), "2048-Game", Style::Titlebar | Style::Close);
-	GameState state = WIN;
+	GameState state = MENU;
 	Clock gameClock;
 	int timeLimit = 0;
 	gameSound Sound;

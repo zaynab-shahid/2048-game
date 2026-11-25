@@ -1,0 +1,5 @@
+roundrect fn(tiles and boerad should be round rect)
+standard clr scheme
+background
+how to playy
+leaderboard
