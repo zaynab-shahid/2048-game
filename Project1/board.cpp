@@ -171,7 +171,6 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 	Text text(font, "0", 30);
 
 	rectangle.setPosition({ X - 10, Y - 10 });
-	rectangle.setFillColor(Color(255, 218, 185));
 
 	window.draw(rectangle);
 
@@ -300,6 +299,7 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 		soundButton.setFillColor(Color(143, 122, 102));
 		menu.setFillColor(Color(143, 122, 102));
 	    retry.setFillColor(Color(143, 122, 102));
+		rectangle.setFillColor(Color(255, 218, 185));
 	}
 	else if (current_theme == 1)
 	{
@@ -318,13 +318,11 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 		themeButton.setOutlineColor(Color::White);
 		themeText.setString("Theme: Neon");
 		menu.setFillColor(Color({ 109,93,211 }));
-<<<<<<< Updated upstream
-=======
+		rectangle.setFillColor(Color(38, 42, 74));
 		menu.setOutlineColor(Color::White);
 		retry.setFillColor(Color({ 109,93,211 }));
 		retry.setOutlineColor(Color::White);
 		
->>>>>>> Stashed changes
 	}
 	else if (current_theme == 2)
 	{
@@ -337,7 +335,7 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 		soundButton.setFillColor(Color(86, 117, 89));
 		menu.setFillColor(Color({ 86, 117, 89 }));
 		retry.setFillColor(Color({ 86, 117, 89 }));
-		
+		rectangle.setFillColor(Color(163, 191, 165));
 
 	}
 	if (sound == false)
