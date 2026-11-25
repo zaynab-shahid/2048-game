@@ -2,7 +2,7 @@
 #include"movement.h"
 #include "board.h"
 #include"sound.h"
-void right(int array[][4], int &score)
+void right(int array[][4], int &score, GameState& state)
 {
 	for (int i = 0; i < 4; i++)
 	{
@@ -39,9 +39,12 @@ void right(int array[][4], int &score)
 			}
 		} // rearranging after merging
 	}
-
+	if (Won(array) == true)
+	{
+		state = WIN;
+	}
 }
-void left(int array[][4], int &score)
+void left(int array[][4], int &score, GameState& state)
 {
 	for (int i = 0; i < 4; i++)
 	{
@@ -79,9 +82,13 @@ void left(int array[][4], int &score)
 			}
 		} // rearranging merged tiles
 	}
+	if (Won(array) == true)
+	{
+		state = WIN;
+	}
 }
 
-void top(int array[][4], int &score)
+void top(int array[][4], int &score, GameState& state)
 {
 	for (int i = 0; i < 4; i++) //i here is columns
 	{
@@ -118,9 +125,13 @@ void top(int array[][4], int &score)
 			}
 		} // rearranging merged tiles
 	}
+	if (Won(array) == true)
+	{
+		state = WIN;
+	}
 }
 
-void bottom(int array[][4], int &score)
+void bottom(int array[][4], int &score, GameState& state)
 {
 	for (int i = 0; i < 4; i++)
 	{
@@ -157,9 +168,13 @@ void bottom(int array[][4], int &score)
 			}
 		}// final time rearranging merged cells
 	}
+	if (Won(array) == true)
+	{
+		state = WIN;
+	}
 }
 
-void keys(const Event::KeyPressed& keyPressed, int array[][4], int &score,gameSound &Sound)
+void keys(const Event::KeyPressed& keyPressed, int array[][4], int &score,gameSound &Sound, GameState& state)
 	{
 		if (keyPressed.code == Keyboard::Key::Left)
 		{
@@ -170,7 +185,7 @@ void keys(const Event::KeyPressed& keyPressed, int array[][4], int &score,gameSo
 					before[i][j] = array[i][j];
 				}
 			int scoreBefore = score;
-			left(array, score);
+			left(array, score, state);
 			bool move = false;
 			for (int i = 0;i < 4;i++)
 				for (int j = 0;j < 4;j++)
@@ -200,7 +215,7 @@ void keys(const Event::KeyPressed& keyPressed, int array[][4], int &score,gameSo
 					before[i][j] = array[i][j];
 				}
 			int scoreBefore = score;
-			right(array, score);
+			right(array, score, state);
 			bool move = false;
 			for (int i = 0;i < 4;i++)
 				for (int j = 0;j < 4;j++)
@@ -230,7 +245,7 @@ void keys(const Event::KeyPressed& keyPressed, int array[][4], int &score,gameSo
 					before[i][j] = array[i][j];
 				}
 			int scoreBefore = score;
-			top(array, score);
+			top(array, score, state);
 			bool move = false;
 			for (int i = 0;i < 4;i++)
 				for (int j = 0;j < 4;j++)
@@ -261,7 +276,7 @@ void keys(const Event::KeyPressed& keyPressed, int array[][4], int &score,gameSo
 					before[i][j] = array[i][j];
 				}
 			int scoreBefore = score;
-			bottom(array, score);
+			bottom(array, score, state);
 			bool move = false;
 			for (int i = 0;i < 4;i++)
 				for (int j = 0;j < 4;j++)

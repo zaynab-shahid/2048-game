@@ -10,6 +10,21 @@
 using namespace sf;
 using namespace std;
 
+bool Won(const int array[4][4])
+{
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			if (array[i][j] >= 2048)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 void new_number(int array[][4])
 {
 	int space = 0;
