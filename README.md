@@ -48,27 +48,31 @@ The game has **4 difficulty levels**. Difficulty changes the grid size and the t
 | Level | Description |
 | --- | --- |
 | Easy | 4x4 board, no time limit |
-| Level 2 | *(fill in board size / time limit)* |
-| Level 3 | *(fill in board size / time limit)* |
-| Level 4 | *(fill in board size / time limit)* |
+| Medium| 4x4 board, 10 mins time limit |
+| Hard | 4x4 board, 7 mins time limit |
+| Extra Hard | 4x4 board, / 5 mins time limit |
 
 ## Themes
 
 The game comes with **3 themes** that change the colours of the board and tiles:
 
 1. Standard
-2. *(fill in theme name)*
-3. *(fill in theme name)*
+2. Neon
+3. Forests
 
 ---
 
 ## Screenshots
 
-Add your screenshots here, for example:
+For example:
 
 ```
 ![Main Menu](screenshots/menu.png)
+<img width="730" height="946" alt="image" src="https://github.com/user-attachments/assets/a7bccb2f-86a7-4afc-9e0c-bad682231e98" />
+
 ![Gameplay](screenshots/gameplay.png)
+<img width="748" height="879" alt="image" src="https://github.com/user-attachments/assets/5d45c620-306f-47db-a785-a3a539252a07" />
+
 ```
 
 ---
