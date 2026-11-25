@@ -76,10 +76,12 @@ void menuInput(const Event& event, GameState& state)
     }
     if (state == HOWTOPLAY || state == LEADERBOARD)
     {
+         
         if (keyPressed != nullptr && keyPressed->code == Keyboard::Key::Escape)
         {
             state = MENU;
         }
+        
     }
 
 }
@@ -92,7 +94,7 @@ void drawMenu(RenderWindow& window, const Font& font)
     title.setPosition({ 285.f, 100.f });
 
 	Text description(font, "C++/SFML-Fundamental Programming Project", 24);
-	description.setPosition({ 160, 200.f });
+	description.setPosition({ 150, 200.f });
     description.setFillColor(Color::Black);
 	
     RectangleShape themeButton({ 320.f, 80.f });
@@ -143,7 +145,7 @@ void drawMenu(RenderWindow& window, const Font& font)
     centerText(playText, playButton);
 
     Text hint(font, "Press Enter to play", 20);
-    hint.setPosition({ x+85, 650.f });
+    hint.setPosition({ x+75, 650.f });
 
 	Text howToPlayText(font, "How to Play", 26);
 	centerText(howToPlayText, howToPlayButton);

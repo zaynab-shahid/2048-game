@@ -105,7 +105,7 @@ int main()
 			else if (state == HOWTOPLAY)
 			{
 				howToPlayInput(*event, window, state);
-				drawHowToPlay(window, font);
+				
 			}
 		
 			/*else if (state == LEADERBOARD)
@@ -163,6 +163,10 @@ int main()
 		else if (state == LOSE)
 		{
 			loseScreen(window, font, array, score, highscore);
+		}
+		if (state == HOWTOPLAY)
+		{
+			drawHowToPlay(window, font);
 		}
 		window.display();
 	}

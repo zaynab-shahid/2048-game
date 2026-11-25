@@ -300,9 +300,27 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 	Text returnMenu(font, "Menu", 20);
 	centerText(returnMenu, menu);
 
+	Text diffLevel(font, "0", 28);
+	diffLevel.setPosition({ 500.f, 150.f });
+	if (current_mode == 0)
+	{
+		diffLevel.setString("Easy 4x4");
+	}
+	else if (current_mode == 1)
+	{
+		diffLevel.setString("Medium 4x4");
+	}
+	else if (current_mode == 2)
+	{
+		diffLevel.setString("Hard 4x4");
+	}
+	else
+		diffLevel.setString("Extreme Hard 4x4");
+
 	if (current_theme == 0)
 	{
 		boardTitle.setFillColor(Color(119, 110, 101));
+		diffLevel.setFillColor(Color(119, 110, 101));
 	    scoreBox.setFillColor(Color(143, 122, 102));
 	    bestScoreBox.setFillColor(Color(143, 122, 102));
 		themeButton.setFillColor(Color(143, 122, 102));
@@ -314,7 +332,7 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 	else if (current_theme == 1)
 	{
 		boardTitle.setFillColor(Color::White);
-		boardTitle.setFillColor(Color::White);
+		diffLevel.setFillColor(Color::White);
 		scoreBox.setFillColor(Color(109, 93, 211));
 		scoreBox.setOutlineColor(Color::White);
 		scoreText.setFillColor(Color::White);
@@ -337,6 +355,7 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 	{
 		
 		boardTitle.setFillColor(Color(34, 139, 34));
+		diffLevel.setFillColor(Color(34, 139, 34));
 		scoreBox.setFillColor(Color(86, 117, 89));
 		bestScoreBox.setFillColor(Color(86, 117, 89));
 		themeButton.setFillColor(Color(86, 117, 89));
@@ -351,6 +370,7 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 		centerText(soundText, soundButton);
 
 	}
+	
 	centerText(themeText, themeButton);
 	timeText.setPosition({ X - 10 , 125 });
 	window.draw(timeText);
@@ -367,6 +387,8 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 	window.draw(menu);
 	window.draw(returnMenu);
 	window.draw(restart);
+	window.draw(diffLevel);
+
 	
 	
 }
@@ -481,27 +503,36 @@ void winScreen(RenderWindow& window, const Font& font, const int array[4][4], in
 
 void howToPlayInput(const Event& event, const RenderWindow& window, GameState& state)
 {
-	if (state != HOWTOPLAY)
-		return;
-	const Event::MouseButtonPressed* mousePressed = event.getIf<Event::MouseButtonPressed>();
-	Vector2f clickPos(static_cast<float>(mousePressed->position.x), static_cast<float>(mousePressed->position.y));
-	if (!mousePressed || mousePressed->button != Mouse::Button::Left)
+	if (state == MENU)
 	{
-		
-		FloatRect howToPlayBounds({ 100.f, 750.f }, { 160.f, 60.f });	
-		if (howToPlayBounds.contains(clickPos))
+		if (const auto* mousePressed = event.getIf<Event::MouseButtonPressed>())
 		{
-			state = HOWTOPLAY;
+			if (mousePressed->button == Mouse::Button::Left)
+			{
+				Vector2f clickPos(static_cast<float>(mousePressed->position.x),static_cast<float>(mousePressed->position.y));
+
+				FloatRect howToPlayBounds({ 100.f, 750.f }, { 160.f, 60.f });
+				if (howToPlayBounds.contains(clickPos))
+					state = HOWTOPLAY;
+			}
 		}
-		const Event::KeyPressed* keyPressed = event.getIf<Event::KeyPressed>();
-	    if (state == HOWTOPLAY )
-	    {
-		  if (keyPressed != nullptr && keyPressed->code == Keyboard::Key::Escape)
-		   {
-			state = MENU;
-		   }
-	    }
-	
+	}
+	else if (state == HOWTOPLAY)
+	{
+		if (const auto* mousePressed = event.getIf<Event::MouseButtonPressed>())
+		{
+			Vector2f clickPos(static_cast<float>(mousePressed->position.x), static_cast<float>(mousePressed->position.y));
+		    FloatRect backbounds({ 320.f, 600.f }, { 160.f, 60.f });
+			if (backbounds.contains(clickPos))
+				state=MENU;
+			
+		}
+		
+		if (const auto* keyPressed = event.getIf<Event::KeyPressed>())
+		{
+			if (keyPressed->code == Keyboard::Key::Escape)
+				state = MENU;
+		}
 	}
 }
 
@@ -602,6 +633,7 @@ void loseScreen(RenderWindow& window, const Font& font, const int array[4][4], i
 		bestScore.setFillColor(Color(68, 98, 76));
 		window.clear(Color(235, 240, 228));
 	}
+	
 
 
 	window.draw(menu);
@@ -613,4 +645,5 @@ void loseScreen(RenderWindow& window, const Font& font, const int array[4][4], i
 	window.draw(scoreBox);
 	window.draw(scoreText);
 	window.draw(bestScore);
+	
 }
