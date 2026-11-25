@@ -241,9 +241,9 @@ void drawMenu(RenderWindow& window, const Font& font)
 		difficulty.setFillColor(Color(86, 117, 89));
         soundButton.setOutlineColor(Color::Black);
 		soundButton.setFillColor(Color(86, 117, 89));	
-        howToPlayButton.setFillColor(Color(87, 138, 108));
+        howToPlayButton.setFillColor(Color(86, 117, 89));
         howToPlayButton.setOutlineColor(Color::Black);
-		leaderboardButton.setFillColor(Color(87, 138, 108));
+		leaderboardButton.setFillColor(Color(86, 117, 89));
 		leaderboardButton.setOutlineColor(Color::Black);
     }
     if (sound==false)

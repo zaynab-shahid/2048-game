@@ -218,26 +218,31 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 		}
 	}
 
-	float pos = 190;
+	float pos = 200;
+	float gap = X - 10;
 	Text boardTitle(font, "2048", 70);
 	boardTitle.setPosition({ X - 10, 30 });
 
 	RectangleShape scoreBox({ 130.f, 90.f });
 	scoreBox.setPosition({ 450, 50 });
+	scoreBox.setOutlineColor(Color::Black);
+	scoreBox.setOutlineThickness(3.f);
 	
 
 	RectangleShape bestScoreBox({ 130.f,90.f });
 	bestScoreBox.setPosition({ 600, 50 });
+	bestScoreBox.setOutlineColor(Color::Black);
+	bestScoreBox.setOutlineThickness(3.f);
 
 
 	Text scoreText(font, "0", 25);
 	scoreText.setString("Score: " + to_string(score));
-	scoreText.setFillColor(Color::Black);
+	scoreText.setFillColor(Color::White);
 	centerText(scoreText, scoreBox);
 
 	Text bestText(font, "0", 25);
 	bestText.setString("Best: " + to_string(highscore));
-	bestText.setFillColor(Color::Black);
+	bestText.setFillColor(Color::White);
 	centerText(bestText, bestScoreBox);
 
 	Text timeText(font, "0", 25);
@@ -252,27 +257,34 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 	timeText.setFillColor(Color::Black);
 
 	RectangleShape soundButton({ 150.f, 40.f });
-	soundButton.setPosition({ X - 10, pos });
+	soundButton.setPosition({ gap, pos });
 	Text soundText(font, "Sound: ON", 20);
 	soundButton.setOutlineThickness(3.f);
 	soundButton.setOutlineColor(Color::Black);
 	centerText(soundText, soundButton);
 
+	gap = gap + 165;
 	RectangleShape themeButton({ 150.f, 40.f });
-	themeButton.setPosition({ X+155, pos });
+	themeButton.setPosition({ gap, pos });
 	themeButton.setOutlineColor(Color::Black);
 	themeButton.setOutlineThickness(3.f);
-	Text themeText(font, "Theme: Standard", 20);
+	Text themeText(font, "Theme: Standard", 18);
 	themeText.setFillColor(Color::White);
 	centerText(themeText, themeButton);
 
+	gap = gap + 165;
 	RectangleShape retry({ 150.f, 40.f });
-	retry.setPosition({ X+320, pos });
+	retry.setPosition({ gap, pos });
 	retry.setOutlineThickness(3.f);
-	RectangleShape menu({ 150.f, 40.f });
-	menu.setPosition({ X+500, pos });
-	menu.setOutlineThickness(3.f);
+	retry.setOutlineColor(Color::Black);
 
+    gap = gap + 165;
+	RectangleShape menu({ 150.f, 40.f });
+	menu.setPosition({ gap, pos });
+	menu.setOutlineThickness(3.f);
+	menu.setOutlineColor(Color::Black);
+
+	
 	Text restart(font, "Restart", 20);
 	centerText(restart, retry);
 	Text returnMenu(font, "Menu", 20);
@@ -281,8 +293,8 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 	if (current_theme == 0)
 	{
 		boardTitle.setFillColor(Color(119, 110, 101));
-	    scoreBox.setFillColor(Color(255, 218, 185));
-	    bestScoreBox.setFillColor(Color(255, 218, 185));
+	    scoreBox.setFillColor(Color(143, 122, 102));
+	    bestScoreBox.setFillColor(Color(143, 122, 102));
 		themeButton.setFillColor(Color(143, 122, 102));
 		themeText.setString("Theme: Standard");
 		soundButton.setFillColor(Color(143, 122, 102));
@@ -293,24 +305,39 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 	{
 		boardTitle.setFillColor(Color::White);
 		boardTitle.setFillColor(Color::White);
-		scoreBox.setFillColor(Color::White);
+		scoreBox.setFillColor(Color(109, 93, 211));
+		scoreBox.setOutlineColor(Color::White);
 		scoreText.setFillColor(Color::White);
 		bestText.setFillColor(Color::White);
-		bestScoreBox.setFillColor(Color::White);
+		bestScoreBox.setFillColor(Color(109, 93, 211));
+		bestScoreBox.setOutlineColor(Color::White);
 		timeText.setFillColor(Color::White);
 		soundButton.setOutlineColor(Color::White);
 		soundButton.setFillColor(Color(109, 93, 211));
 		themeButton.setFillColor(Color(109, 93, 211));
+		themeButton.setOutlineColor(Color::White);
+		themeText.setString("Theme: Neon");
 		menu.setFillColor(Color({ 109,93,211 }));
+<<<<<<< Updated upstream
+=======
+		menu.setOutlineColor(Color::White);
+		retry.setFillColor(Color({ 109,93,211 }));
+		retry.setOutlineColor(Color::White);
+		
+>>>>>>> Stashed changes
 	}
 	else if (current_theme == 2)
 	{
 		
 		boardTitle.setFillColor(Color(34, 139, 34));
-		scoreBox.setFillColor(Color(34, 139, 34));
-		bestScoreBox.setFillColor(Color(34, 139, 34));
-		themeButton.setFillColor(Color(109, 93, 211));
+		scoreBox.setFillColor(Color(86, 117, 89));
+		bestScoreBox.setFillColor(Color(86, 117, 89));
+		themeButton.setFillColor(Color(86, 117, 89));
+		themeText.setString("Theme: Forest");
 		soundButton.setFillColor(Color(86, 117, 89));
+		menu.setFillColor(Color({ 86, 117, 89 }));
+		retry.setFillColor(Color({ 86, 117, 89 }));
+		
 
 	}
 	if (sound == false)
@@ -319,6 +346,7 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 		centerText(soundText, soundButton);
 
 	}
+	centerText(themeText, themeButton);
 	timeText.setPosition({ X - 10 , 125 });
 	window.draw(timeText);
 	window.draw(boardTitle);
