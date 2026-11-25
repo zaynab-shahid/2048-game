@@ -187,8 +187,8 @@ void winScreenInput(const Event& event, const RenderWindow& window, GameState& s
 
 	Vector2f clickPos = window.mapPixelToCoords(mouse->position);
 
-	FloatRect retryBounds({ 200.f, 340.f }, { 220.f, 75.f });
-	FloatRect menuBounds({ 450.f, 340.f }, { 220.f, 75.f });
+	FloatRect retryBounds({ 165.f, 570.f }, { 220.f, 75.f });
+	FloatRect menuBounds({ 415.f, 570.f }, { 220.f, 75.f });
 
 if (retryBounds.contains(clickPos))
 {
@@ -210,7 +210,7 @@ void winScreen(RenderWindow& window, const Font& font, const int array[4][4], in
 	title.setPosition({ 170.f , 280.f });
 	Text description(font, "You reached 2048! Retry or go back to menu?", 20);
 
-	description.setPosition({ 225.f, 220.f });
+	//description.setPosition({ 225.f, 220.f });
 	description.setPosition({ 195.f, 405.f });
 
 	RectangleShape retry({ 220.f, 75.f });
