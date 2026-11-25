@@ -28,7 +28,6 @@ int main()
 	Font font;
 	if (!font.openFromFile("arial.ttf"))
 	{
-		
 		return 0;
 	}
 
@@ -92,11 +91,16 @@ int main()
 			{
 				winScreenInput(*event, window, state, score, array);
 			}
+			else if (state == LOSE)
+			{
+				loseScreenInput(*event, window, state, score, array);
+			}
 			else if (state == HOWTOPLAY)
 			{
 				howToPlayInput(*event, window, state);
 				drawHowToPlay(window, font);
 			}
+		
 			/*else if (state == LEADERBOARD)
 			{
 				leaderboardInput(*event, window, state);
@@ -111,11 +115,13 @@ int main()
 		}
 		if (state == PLAYING && is_full(array))
 		{
-			break;
+			state = LOSE;
+			retry(array, timeLimit);
 		}
 		if (state == PLAYING && timeLeft<=0)
 		{
-			break;
+			state = LOSE;
+			retry(array, timeLimit);
 		}
 		Color bgColor = Color(255, 255, 224);
 		if (current_theme == 1)
@@ -140,6 +146,10 @@ int main()
 		else if (state == WIN)
 		{
 			winScreen(window, font, array, score, highscore);
+		}
+		else if (state == LOSE)
+		{
+			loseScreen(window, font, array, score, highscore);
 		}
 		window.display();
 	}
