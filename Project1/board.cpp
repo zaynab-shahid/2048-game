@@ -10,13 +10,6 @@
 using namespace sf;
 using namespace std;
 
-void retry(int array[][4], int timeLimit)
-{
-	timeLimit = 0;
-	new_number(array);
-	new_number(array);
-}
-
 bool Won(const int array[][4])
 {
 	for (int i = 0; i < 4; i++)
@@ -233,12 +226,6 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 		soundButton.setFillColor(Color(143, 122, 102));
 		menu.setFillColor(Color(143, 122, 102));
 	    retry.setFillColor(Color(143, 122, 102));
-
-
-
-
-
-
 	}
 	else if (current_theme == 1)
 	{
@@ -253,24 +240,6 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 		soundButton.setFillColor(Color(109, 93, 211));
 		themeButton.setFillColor(Color(109, 93, 211));
 		menu.setFillColor(Color({ 109,93,211 }));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
 	}
 	else if (current_theme == 2)
 	{
@@ -324,12 +293,13 @@ void winScreenInput(const Event& event, const RenderWindow& window, GameState& s
 		for (int r = 0; r < 4; r++)
 			for (int c = 0; c < 4; c++)
 				array[r][c] = 0;
-
-		state = GameState::PLAYING;
+		new_number(array);
+		new_number(array);
+		state = PLAYING;
 	}
 	else if (menuBounds.contains(clickPos))
 	{
-		state = GameState::MENU;
+		state = MENU;
 	}
 }
 void winScreen(RenderWindow& window, const Font& font, const int array[4][4], int score, int highscore)
@@ -459,11 +429,13 @@ void loseScreenInput(const Event& event, const RenderWindow& window, GameState& 
 			for (int c = 0; c < 4; c++)
 				array[r][c] = 0;
 
-		GameState state = PLAYING;
+		new_number(array);
+		new_number(array);
+		state = PLAYING;
 	}
 	else if (menuBounds.contains(clickPos))
 	{
-		GameState state = MENU;
+		state = MENU;
 	}
 }
 

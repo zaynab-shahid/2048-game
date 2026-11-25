@@ -2,7 +2,6 @@
 #include <SFML/Graphics.hpp>
 #include "menu.h"
 using namespace sf;
-void retry(int array[][4], int time);
 bool Won(const int array[4][4]);
 void new_number(int array[][4]);
 bool Lost(const int array[][4]);

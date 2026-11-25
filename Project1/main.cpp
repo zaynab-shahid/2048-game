@@ -11,6 +11,26 @@
 #include "sound.h"
 #include"howtoplay.h"
 
+int getTimeLimit(int current_mode)
+{
+	if (current_mode == 0)
+	{
+		return 180;
+	}
+	else if (current_mode == 1)
+	{
+		return 120;
+	}
+	else if (current_mode == 2)
+	{
+		return 90;
+	}
+	else 
+	{
+		return 60;
+	}
+}
+
 using namespace std;
 using namespace sf;
 
@@ -37,6 +57,7 @@ int main()
 	int timeLimit = 0;
 	gameSound Sound;
 	Sound.loadSounds();
+	GameState previousState = state;
 
 	while (window.isOpen())
 	{
@@ -51,6 +72,7 @@ int main()
 				menuInput(*event, state);
 				if (state == PLAYING)
 				{
+					timeLimit = getTimeLimit(current_mode);
 					gameClock.restart();
 					if (current_mode == 0)
 					{
@@ -106,6 +128,30 @@ int main()
 				leaderboardInput(*event, window, state);
 			}*/
 		}
+
+		if (state == PLAYING && previousState != PLAYING)
+		{
+			if (current_mode == 0)
+			{
+				timeLimit = 180;
+			}
+			else if (current_mode == 1)
+			{
+				timeLimit = 120;
+			}
+			else if (current_mode == 2)
+			{
+				timeLimit = 90;
+			}
+			else
+			{
+				timeLimit = 60;
+			}
+
+			gameClock.restart();
+		}
+		previousState = state;
+
 		int timeLeft = timeLimit - gameClock.getElapsedTime().asSeconds();
 		if (score > highscore)
 		{
@@ -116,12 +162,10 @@ int main()
 		if (state == PLAYING && is_full(array))
 		{
 			state = LOSE;
-			retry(array, timeLimit);
 		}
 		if (state == PLAYING && timeLeft<=0)
 		{
 			state = LOSE;
-			retry(array, timeLimit);
 		}
 		Color bgColor = Color(255, 255, 224);
 		if (current_theme == 1)
