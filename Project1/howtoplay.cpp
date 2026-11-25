@@ -39,5 +39,6 @@ void drawHowToPlay(RenderWindow& window, const Font& font)
 	window.draw(HowToPlayText);
 	window.draw(Instructions);
 	window.draw(backButton);
+	window.draw(backText);
 	window.display();
 }

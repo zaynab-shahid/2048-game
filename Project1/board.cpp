@@ -148,35 +148,142 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 			window.draw(text);
 		}
 	}
-	Text title(font, "2048", 85);
 
-	Text scoreText(font, "0", 30);
+	float pos = 190;
+	Text boardTitle(font, "2048", 70);
+	boardTitle.setPosition({ X - 10, 30 });
+
+	RectangleShape scoreBox({ 130.f, 90.f });
+	scoreBox.setPosition({ 450, 50 });
+	
+
+	RectangleShape bestScoreBox({ 130.f,90.f });
+	bestScoreBox.setPosition({ 600, 50 });
+
+
+	Text scoreText(font, "0", 25);
 	scoreText.setString("Score: " + to_string(score));
 	scoreText.setFillColor(Color::Black);
-	if (current_theme == 1)
-	{
-		scoreText.setFillColor(Color::White);
-	}
-	scoreText.setPosition({ X - 10, Y - 60 });
-	window.draw(scoreText);
-	Text bestText(font, "0", 30);
+	centerText(scoreText, scoreBox);
+
+	Text bestText(font, "0", 25);
 	bestText.setString("Best: " + to_string(highscore));
 	bestText.setFillColor(Color::Black);
-	if (current_theme == 1)
-	{
-		bestText.setFillColor(Color::White);
-	}
-	bestText.setPosition({ X+ 250, Y - 60 });
-	window.draw(bestText);
-	Text timeText(font, "0", 30);
+	centerText(bestText, bestScoreBox);
+
+	Text timeText(font, "0", 25);
 	timeText.setString("Time: " + to_string(timeLeft));
 	timeText.setFillColor(Color::Black);
-	if (current_theme == 1)
+
+	RectangleShape soundButton({ 150.f, 40.f });
+	soundButton.setPosition({ X - 10, pos });
+	Text soundText(font, "Sound: ON", 20);
+	soundButton.setOutlineThickness(3.f);
+	soundButton.setOutlineColor(Color::Black);
+	centerText(soundText, soundButton);
+
+	RectangleShape themeButton({ 150.f, 40.f });
+	themeButton.setPosition({ X+155, pos });
+	themeButton.setOutlineColor(Color::Black);
+	themeButton.setOutlineThickness(3.f);
+	Text themeText(font, "Theme: Standard", 20);
+	themeText.setFillColor(Color::White);
+	centerText(themeText, themeButton);
+
+	RectangleShape retry({ 150.f, 40.f });
+	retry.setPosition({ X+320, pos });
+	retry.setOutlineThickness(3.f);
+	RectangleShape menu({ 150.f, 40.f });
+	menu.setPosition({ X+500, pos });
+	menu.setOutlineThickness(3.f);
+
+	Text restart(font, "Restart", 20);
+	centerText(restart, retry);
+	Text returnMenu(font, "Menu", 20);
+	centerText(returnMenu, menu);
+
+	if (current_theme == 0)
 	{
-		timeText.setFillColor(Color::White);
+		boardTitle.setFillColor(Color(119, 110, 101));
+	    scoreBox.setFillColor(Color(255, 218, 185));
+	    bestScoreBox.setFillColor(Color(255, 218, 185));
+		themeButton.setFillColor(Color(143, 122, 102));
+		themeText.setString("Theme: Standard");
+		soundButton.setFillColor(Color(143, 122, 102));
+		menu.setFillColor(Color(143, 122, 102));
+	    retry.setFillColor(Color(143, 122, 102));
+
+
+
+
+
+
 	}
-	timeText.setPosition({ X-10 , 125  });
+	else if (current_theme == 1)
+	{
+		boardTitle.setFillColor(Color::White);
+		boardTitle.setFillColor(Color::White);
+		scoreBox.setFillColor(Color::White);
+		scoreText.setFillColor(Color::White);
+		bestText.setFillColor(Color::White);
+		bestScoreBox.setFillColor(Color::White);
+		timeText.setFillColor(Color::White);
+		soundButton.setOutlineColor(Color::White);
+		soundButton.setFillColor(Color(109, 93, 211));
+		themeButton.setFillColor(Color(109, 93, 211));
+		menu.setFillColor(Color({ 109,93,211 }));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+	}
+	else if (current_theme == 2)
+	{
+		
+		boardTitle.setFillColor(Color(34, 139, 34));
+		scoreBox.setFillColor(Color(34, 139, 34));
+		bestScoreBox.setFillColor(Color(34, 139, 34));
+		themeButton.setFillColor(Color(109, 93, 211));
+		soundButton.setFillColor(Color(86, 117, 89));
+
+	}
+	if (sound == false)
+	{
+		soundText.setString("Sound: OFF");
+		centerText(soundText, soundButton);
+
+	}
+	timeText.setPosition({ X - 10 , 125 });
 	window.draw(timeText);
+	window.draw(boardTitle);
+	window.draw(scoreBox);
+	window.draw(scoreText);
+	window.draw(bestScoreBox);
+	window.draw(bestText);
+	window.draw(soundButton);
+	window.draw(soundText);
+	window.draw(themeButton);
+	window.draw(themeText);
+	window.draw(retry);
+	window.draw(menu);
+	window.draw(returnMenu);
+	window.draw(restart);
+	
+	
 }
 
 void winScreenInput(const Event& event, const RenderWindow& window, GameState& state, int& score, int array[4][4])
@@ -208,7 +315,7 @@ void winScreen(RenderWindow& window, const Font& font, const int array[4][4], in
 {
 	Text title(font, "YOU WON!", 90);
 	title.setPosition({ 170.f , 280.f });
-	Text description(font, "You reached 2048! Retry or go back to menu?", 20);
+	Text description(font, "You reached 2048! Replay or go back to menu?", 20);
 
 	description.setPosition({ 225.f, 220.f });
 	description.setPosition({ 195.f, 405.f });

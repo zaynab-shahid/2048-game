@@ -74,7 +74,7 @@ void menuInput(const Event& event, GameState& state)
     {
         state = PLAYING;
     }
-    if (state == HOWTOPLAY )
+    if (state == HOWTOPLAY || state == LEADERBOARD)
     {
         if (keyPressed != nullptr && keyPressed->code == Keyboard::Key::Escape)
         {
