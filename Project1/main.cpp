@@ -10,6 +10,7 @@
 #include<fstream>
 #include "sound.h"
 #include"howtoplay.h"
+#include"leaderboard.h"
 
 int getTimeLimit(int current_mode)
 {
@@ -42,6 +43,8 @@ int main()
 	int highscore = 0;
 	ifstream infile("highscore.txt");
 	infile >> highscore;
+	int leaderboard[5];
+	loadLeaderboard(leaderboard);
 	new_number(array);
 	new_number(array);
 
@@ -78,9 +81,9 @@ int main()
 				}
 				if (const auto* mousePressed = event->getIf<Event::MouseButtonPressed>())
 				{
-					if(mousePressed->button == Mouse::Button::Left)
+					if (mousePressed->button == Mouse::Button::Left)
 					{
-						if(sound)
+						if (sound)
 							Sound.playClickSound();
 					}
 				}
@@ -89,7 +92,7 @@ int main()
 			{
 				if (const auto* keyPressed = event->getIf<Event::KeyPressed>())
 				{
-					keys(*keyPressed, array, score, Sound , state);
+					keys(*keyPressed, array, score, Sound, state);
 					cout << "Score:" << score << endl;
 				}
 				boardInput(*event, window, state, score, array, timeLimit, gameClock);
@@ -107,13 +110,20 @@ int main()
 				howToPlayInput(*event, window, state);
 				
 			}
-		
+			else if (state == LEADERBOARD)
+			{
+				leaderboardInput(*event, window, state);
+			}
 		}
 
 		if (state == PLAYING && previousState != PLAYING)
 		{
 			timeLimit = getTimeLimit(current_mode);
 			gameClock.restart();
+		}
+		if ((state == WIN || state == LOSE)&& previousState == PLAYING)
+		{
+			addScore(leaderboard, score);
 		}
 		previousState = state;
 
@@ -160,9 +170,16 @@ int main()
 		{
 			loseScreen(window, font, array, score, highscore);
 		}
+
 		if (state == HOWTOPLAY)
 		{
 			drawHowToPlay(window, font);
+		}
+		
+		else if (state == LEADERBOARD)
+		{
+			drawLeaderboard(window, font, leaderboard);
+
 		}
 		window.display();
 	}

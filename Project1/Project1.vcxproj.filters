@@ -35,6 +35,9 @@
     <ClCompile Include="howtoplay.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="leaderboard.cpp">
+      <Filter>Header Files\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="movement.h">
@@ -53,6 +56,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="howtoplay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="leaderboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
