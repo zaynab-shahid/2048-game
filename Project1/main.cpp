@@ -104,10 +104,10 @@ int main()
 			{
 				if (const auto* keyPressed = event->getIf<Event::KeyPressed>())
 				{
-					
 					keys(*keyPressed, array, score, Sound , state);
 					cout << "Score:" << score << endl;
 				}
+				boardInput(*event, window, state, score, array, timeLimit, gameClock);
 			}
 			else if (state == WIN)
 			{

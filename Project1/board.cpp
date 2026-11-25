@@ -99,6 +99,61 @@ bool is_full( const int array[][4])
 	return true;
 }
 
+void boardInput(const Event& event, const RenderWindow& window, GameState& state, int& score, int array[4][4], int& timeLimit, Clock& gameClock)
+{
+	const auto* mouse = event.getIf<Event::MouseButtonPressed>();
+	if (!mouse || mouse->button != Mouse::Button::Left)
+		return;
+
+	Vector2f clickPos = window.mapPixelToCoords(mouse->position);
+
+	FloatRect soundBounds({ 65.f, 190.f }, { 160.f, 40.f });
+	FloatRect themeBounds({ 235.f, 190.f }, { 160.f, 40.f });
+	FloatRect restartBounds({ 405.f, 190.f }, { 160.f, 40.f });
+	FloatRect menuBounds({ 575.f, 190.f }, { 160.f, 40.f });
+
+	if (soundBounds.contains(clickPos))
+	{
+		sound = !sound;
+	}
+	else if (themeBounds.contains(clickPos))
+	{
+		current_theme = (current_theme + 1) % 3;
+	}
+	else if (restartBounds.contains(clickPos))
+	{
+		score = 0;
+		for (int r = 0; r < 4; r++)
+			for (int c = 0; c < 4; c++)
+				array[r][c] = 0;
+
+		new_number(array);
+		new_number(array);
+
+		if (current_mode == 0)
+			timeLimit = 180;
+		else if (current_mode == 1)
+			timeLimit = 120;
+		else if (current_mode == 2)
+			timeLimit = 90;
+		else
+			timeLimit = 60;
+
+		gameClock.restart();
+	}
+	else if (menuBounds.contains(clickPos))
+	{
+		score = 0;
+		for (int r = 0; r < 4; r++)
+			for (int c = 0; c < 4; c++)
+				array[r][c] = 0;
+
+		new_number(array);
+		new_number(array);
+		state = MENU;
+	}
+}
+
 void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int score, int highscore, int timeLeft)
 {
 	float x = 0;
@@ -308,7 +363,6 @@ void winScreen(RenderWindow& window, const Font& font, const int array[4][4], in
 	title.setPosition({ 170.f , 280.f });
 	Text description(font, "You reached 2048! Replay or go back to menu?", 20);
 
-	//description.setPosition({ 225.f, 220.f });
 	description.setPosition({ 195.f, 405.f });
 
 	RectangleShape retry({ 220.f, 75.f });
