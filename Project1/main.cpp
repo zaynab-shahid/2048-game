@@ -11,10 +11,8 @@
 #include "sound.h"
 #include"howtoplay.h"
 
-
 using namespace std;
 using namespace sf;
-
 
 int main()
 {
@@ -86,7 +84,7 @@ int main()
 				if (const auto* keyPressed = event->getIf<Event::KeyPressed>())
 				{
 					
-					keys(*keyPressed, array, score, Sound );
+					keys(*keyPressed, array, score, Sound , state);
 					cout << "Score:" << score << endl;
 				}
 			}
