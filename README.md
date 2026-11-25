@@ -28,7 +28,7 @@ Slide the tiles, merge matching numbers, and try to reach the **2048** tile befo
 
 | Action | Keys |
 | --- | --- |
-| Slide tiles | Arrow keys or `W` `A` `S` `D` |
+| Slide tiles | Arrow keys  |
 | Start the game from the menu | `Enter` or click **Play** |
 | Return to the menu from How to Play | `Esc` or click **Back** |
 
