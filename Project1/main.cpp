@@ -75,22 +75,6 @@ int main()
 				{
 					timeLimit = getTimeLimit(current_mode);
 					gameClock.restart();
-					if (current_mode == 0)
-					{
-						timeLimit = -1;
-					}
-					else if (current_mode == 1)
-					{
-						timeLimit = 600;
-					}
-					else if (current_mode == 2)
-					{
-						timeLimit = 300;
-					}
-					else
-					{
-						timeLimit = 180;
-					}
 				}
 				if (const auto* mousePressed = event->getIf<Event::MouseButtonPressed>())
 				{
@@ -132,23 +116,7 @@ int main()
 
 		if (state == PLAYING && previousState != PLAYING)
 		{
-			if (current_mode == 0)
-			{
-				timeLimit = -1;
-			}
-			else if (current_mode == 1)
-			{
-				timeLimit = 600;
-			}
-			else if (current_mode == 2)
-			{
-				timeLimit = 300;
-			}
-			else
-			{
-				timeLimit = 180;
-			}
-
+			timeLimit = getTimeLimit(current_mode);
 			gameClock.restart();
 		}
 		previousState = state;
