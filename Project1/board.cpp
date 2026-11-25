@@ -10,7 +10,7 @@
 using namespace sf;
 using namespace std;
 
-bool Won(const int array[4][4])
+bool Won(const int array[][4])
 {
 	for (int i = 0; i < 4; i++)
 	{
@@ -25,8 +25,22 @@ bool Won(const int array[4][4])
 	return false;
 }
 
+bool lost(const int array[][4])
+{
+	bool full = is_full(array);
+	if (full == true)
+	{
+		return true;
+	}
+	return false;
+}
+
 void new_number(int array[][4])
 {
+	if (lost(array) == true)
+	{
+		return;
+	}
 	int space = 0;
 	for (int i = 0; i < 4; i++)
 	{
@@ -54,7 +68,7 @@ void new_number(int array[][4])
 		}
 	}
 }
-bool is_full(int array[][4])
+bool is_full( const int array[][4])
 {
 	for (int x = 0; x < 4;++x)
 	{

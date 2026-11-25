@@ -32,7 +32,7 @@ int main()
 	}
 
 	RenderWindow window(VideoMode({ 800, 950 }), "2048-Game", Style::Titlebar | Style::Close);
-	GameState state = LOSE;
+	GameState state = MENU;
 	Clock gameClock;
 	int timeLimit = 0;
 	gameSound Sound;
@@ -115,11 +115,11 @@ int main()
 		}
 		if (state == PLAYING && is_full(array))
 		{
-			break;
+			state = LOSE;
 		}
 		if (state == PLAYING && timeLeft<=0)
 		{
-			break;
+			state = LOSE;
 		}
 		Color bgColor = Color(255, 255, 224);
 		if (current_theme == 1)
