@@ -15,19 +15,19 @@ int getTimeLimit(int current_mode)
 {
 	if (current_mode == 0)
 	{
-		return 180;
+		return -1;
 	}
 	else if (current_mode == 1)
 	{
-		return 120;
+		return 600;
 	}
 	else if (current_mode == 2)
 	{
-		return 90;
+		return 300;
 	}
 	else 
 	{
-		return 60;
+		return 180;
 	}
 }
 
@@ -58,6 +58,7 @@ int main()
 	gameSound Sound;
 	Sound.loadSounds();
 	GameState previousState = state;
+	bool hasTimeLimit = true;
 
 	while (window.isOpen())
 	{
@@ -76,19 +77,19 @@ int main()
 					gameClock.restart();
 					if (current_mode == 0)
 					{
-						timeLimit = 180;
+						timeLimit = -1;
 					}
 					else if (current_mode == 1)
 					{
-						timeLimit = 120;
+						timeLimit = 600;
 					}
 					else if (current_mode == 2)
 					{
-						timeLimit = 90;
+						timeLimit = 300;
 					}
 					else
 					{
-						timeLimit = 60;
+						timeLimit = 180;
 					}
 				}
 				if (const auto* mousePressed = event->getIf<Event::MouseButtonPressed>())
@@ -133,19 +134,19 @@ int main()
 		{
 			if (current_mode == 0)
 			{
-				timeLimit = 180;
+				timeLimit = -1;
 			}
 			else if (current_mode == 1)
 			{
-				timeLimit = 120;
+				timeLimit = 600;
 			}
 			else if (current_mode == 2)
 			{
-				timeLimit = 90;
+				timeLimit = 300;
 			}
 			else
 			{
-				timeLimit = 60;
+				timeLimit = 180;
 			}
 
 			gameClock.restart();
@@ -163,7 +164,7 @@ int main()
 		{
 			state = LOSE;
 		}
-		if (state == PLAYING && timeLeft<=0)
+		if (state == PLAYING && timeLimit > 0 && timeLeft <=0)
 		{
 			state = LOSE;
 		}
