@@ -190,19 +190,19 @@ void winScreenInput(const Event& event, const RenderWindow& window, GameState& s
 	FloatRect retryBounds({ 165.f, 570.f }, { 220.f, 75.f });
 	FloatRect menuBounds({ 415.f, 570.f }, { 220.f, 75.f });
 
-if (retryBounds.contains(clickPos))
-{
-	score = 0;
-	for (int r = 0; r < 4; r++)
-		for (int c = 0; c < 4; c++)
-			array[r][c] = 0;
+	if (retryBounds.contains(clickPos))
+	{
+		score = 0;
+		for (int r = 0; r < 4; r++)
+			for (int c = 0; c < 4; c++)
+				array[r][c] = 0;
 
-	state = GameState::PLAYING;
-}
-else if (menuBounds.contains(clickPos))
-{
-	state = GameState::MENU;
-}
+		state = GameState::PLAYING;
+	}
+	else if (menuBounds.contains(clickPos))
+	{
+		state = GameState::MENU;
+	}
 }
 void winScreen(RenderWindow& window, const Font& font, const int array[4][4], int score, int highscore)
 {
@@ -286,6 +286,7 @@ void winScreen(RenderWindow& window, const Font& font, const int array[4][4], in
 	window.draw(scoreText);
 	window.draw(bestScore);
 }
+
 void howToPlayInput(const Event& event, const RenderWindow& window, GameState& state)
 {
 	if (state != HOWTOPLAY)
@@ -310,8 +311,112 @@ void howToPlayInput(const Event& event, const RenderWindow& window, GameState& s
 	    }
 	
 	}
-	
-	
-	
+}
 
+void loseScreenInput(const Event& event, const RenderWindow& window, GameState& state, int& score, int array[4][4])
+{
+	const auto* mouse = event.getIf<Event::MouseButtonPressed>();
+	if (!mouse || mouse->button != Mouse::Button::Left)
+		return;
+
+	Vector2f clickPos = window.mapPixelToCoords(mouse->position);
+
+	FloatRect retryBounds({ 165.f, 570.f }, { 220.f, 75.f });
+	FloatRect menuBounds({ 415.f, 570.f }, { 220.f, 75.f });
+
+	if (retryBounds.contains(clickPos))
+	{
+		score = 0;
+		for (int r = 0; r < 4; r++)
+			for (int c = 0; c < 4; c++)
+				array[r][c] = 0;
+
+		state = GameState::PLAYING;
+	}
+	else if (menuBounds.contains(clickPos))
+	{
+		state = GameState::MENU;
+	}
+}
+
+void loseScreen(RenderWindow& window, const Font& font, const int array[4][4], int score, int highscore)
+{
+	Text title(font, "YOU LOST!", 90);
+	title.setPosition({ 162.f , 280.f });
+	Text description(font, "YOU RAN OUT OF TIME/SPACE!", 20);
+
+	description.setPosition({ 249.f, 405.f });
+
+	RectangleShape retry({ 220.f, 75.f });
+	retry.setPosition({ 165.f, 570.f });
+	RectangleShape menu({ 220.f, 75.f });
+	menu.setPosition({ 415.f, 570.f });
+
+	Text restart(font, "Retry", 27);
+	restart.setPosition({ 242.f, 590.f });
+	Text returnMenu(font, "Menu", 27);
+	returnMenu.setPosition({ 491.f, 590.f });
+
+	Text scoreText(font, "Score: " + to_string(score), 22);
+	scoreText.setPosition({ 349.f, 476.f });
+	Text bestScore(font, "Best: " + to_string(highscore), 22);
+	bestScore.setPosition({ 349.f, 501.f });
+
+	RectangleShape scoreBox({ 230.f, 64.f });
+	scoreBox.setPosition({ 285.f, 470.f });
+	scoreBox.setOutlineThickness(2.f);
+
+	if (current_theme == 0)
+	{
+		title.setFillColor(Color(119, 110, 101));
+		description.setFillColor(Color(145, 134, 123));
+		retry.setFillColor(Color(143, 122, 102));
+		menu.setFillColor(Color(143, 122, 102));
+		restart.setFillColor(Color(249, 246, 242));
+		returnMenu.setFillColor(Color(249, 246, 242));
+		scoreBox.setFillColor(Color(235, 226, 213));
+		scoreBox.setOutlineColor(Color(187, 173, 160));
+		scoreText.setFillColor(Color(119, 110, 101));
+		bestScore.setFillColor(Color(68, 98, 76));
+		window.clear(Color(250, 248, 239));
+	}
+	else if (current_theme == 1)
+	{
+		title.setFillColor(Color(22, 24, 42));
+		description.setFillColor(Color(175, 185, 225));
+		retry.setFillColor(Color(38, 42, 74));
+		menu.setFillColor(Color(0, 210, 211));
+		restart.setFillColor(Color(0, 255, 200));
+		returnMenu.setFillColor(Color(18, 20, 38));
+		scoreBox.setFillColor(Color(28, 32, 58));
+		scoreBox.setOutlineColor(Color(168, 85, 247));
+		scoreText.setFillColor(Color(0, 255, 200));
+		bestScore.setFillColor(Color(175, 185, 225));
+		window.clear(Color(245, 248, 255));
+	}
+	else if (current_theme == 2)
+	{
+		title.setFillColor(Color(32, 56, 39));
+		description.setFillColor(Color(68, 98, 76));
+		retry.setFillColor(Color(76, 122, 86));
+		menu.setFillColor(Color(62, 110, 74));
+		restart.setFillColor(Color(245, 247, 240));
+		returnMenu.setFillColor(Color(245, 247, 240));
+		scoreBox.setFillColor(Color(208, 221, 198));
+		scoreBox.setOutlineColor(Color(114, 148, 118));
+		scoreText.setFillColor(Color(32, 56, 39));
+		bestScore.setFillColor(Color(68, 98, 76));
+		window.clear(Color(235, 240, 228));
+	}
+
+
+	window.draw(menu);
+	window.draw(retry);
+	window.draw(description);
+	window.draw(title);
+	window.draw(restart);
+	window.draw(returnMenu);
+	window.draw(scoreBox);
+	window.draw(scoreText);
+	window.draw(bestScore);
 }

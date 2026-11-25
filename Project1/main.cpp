@@ -28,12 +28,11 @@ int main()
 	Font font;
 	if (!font.openFromFile("arial.ttf"))
 	{
-		
 		return 0;
 	}
 
 	RenderWindow window(VideoMode({ 800, 950 }), "2048-Game", Style::Titlebar | Style::Close);
-	GameState state = WIN;
+	GameState state = LOSE;
 	Clock gameClock;
 	int timeLimit = 0;
 	gameSound Sound;
@@ -92,11 +91,16 @@ int main()
 			{
 				winScreenInput(*event, window, state, score, array);
 			}
+			else if (state == LOSE)
+			{
+				loseScreenInput(*event, window, state, score, array);
+			}
 			else if (state == HOWTOPLAY)
 			{
 				howToPlayInput(*event, window, state);
 				drawHowToPlay(window, font);
 			}
+		
 			/*else if (state == LEADERBOARD)
 			{
 				leaderboardInput(*event, window, state);
@@ -140,6 +144,10 @@ int main()
 		else if (state == WIN)
 		{
 			winScreen(window, font, array, score, highscore);
+		}
+		else if (state == LOSE)
+		{
+			loseScreen(window, font, array, score, highscore);
 		}
 		window.display();
 	}
