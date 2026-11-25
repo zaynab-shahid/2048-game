@@ -154,7 +154,7 @@ int main()
 		}
 		else if (state == PLAYING)
 		{
-			drawBoard(window, font, array, score, highscore, timeLeft);
+			drawBoard(window, font, array, score, highscore, timeLeft, timeLimit);
 		}
 		else if (state == WIN)
 		{

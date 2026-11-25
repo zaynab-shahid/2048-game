@@ -131,13 +131,13 @@ void boardInput(const Event& event, const RenderWindow& window, GameState& state
 		new_number(array);
 
 		if (current_mode == 0)
-			timeLimit = 180;
+			timeLimit = -1;
 		else if (current_mode == 1)
-			timeLimit = 120;
+			timeLimit = 600;
 		else if (current_mode == 2)
-			timeLimit = 90;
+			timeLimit = 300;
 		else
-			timeLimit = 60;
+			timeLimit = 180;
 
 		gameClock.restart();
 	}
@@ -154,7 +154,7 @@ void boardInput(const Event& event, const RenderWindow& window, GameState& state
 	}
 }
 
-void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int score, int highscore, int timeLeft)
+void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int score, int highscore, int timeLeft, int timeLimit)
 {
 	float x = 0;
 	float y = 0;
@@ -241,7 +241,14 @@ void drawBoard(RenderWindow& window, const Font& font, const int array[4][4],int
 	centerText(bestText, bestScoreBox);
 
 	Text timeText(font, "0", 25);
-	timeText.setString("Time: " + to_string(timeLeft));
+	if (timeLimit < 0)
+	{
+		timeText.setString("Time: No Limit");
+	}
+	else 
+	{
+		timeText.setString("Time: " + to_string(timeLeft));
+	}
 	timeText.setFillColor(Color::Black);
 
 	RectangleShape soundButton({ 150.f, 40.f });
